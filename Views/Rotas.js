@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 //Componentes
 import Menu from '../Component/Menu';
-import Player from '../Component/Player';
+import PlayerControl from '../Component/PlayerControl';
 
 // Screen
 import Home from "./Screens/Home";
@@ -16,7 +16,6 @@ import Recardo from "./Screens/Recardo";
 import Sobre from "./Screens/Sobre";
 import Programacao from "./Screens/Programacao";
 import UltimasTocadas from "./Screens/UltimasTocadas";
-
 
 
 
@@ -51,44 +50,44 @@ class Rotas extends Component {
                         rightTitle={this.MenuIcon}
                         onRight={()=>{Actions.drawerOpen()}}
                         renderLeftButton={this.LogoIcon}
-                        renderTitle={Player}
+                        renderTitle={PlayerControl}
                         hideNavBar
                         >
-                        <Scene 
-                            key="home" 
-                            title='Home Page' 
-                            component={Home}
-                        />
-                        <Scene 
-                            key="login" 
-                            title='Login' 
-                            component={Login}
-                        />
-                        <Scene 
-                            key="pedido" 
-                            title='Pedido' 
-                            component={Pedido}
-                        />
-                        <Scene 
-                            key="recardo" 
-                            title='Recardo' 
-                            component={Recardo}
-                        />
-                        <Scene 
-                            key="sobre" 
-                            title='Sobre' 
-                            component={Sobre}
-                        />
-                        <Scene 
-                            key="programacao" 
-                            title='Programação' 
-                            component={Programacao}
-                        />
-                        <Scene 
-                            key="ultimasTocadas" 
-                            title='Ultimas Tocadas' 
-                            component={UltimasTocadas}
-                        />
+                            <Scene 
+                                key="home" 
+                                title='Home Page' 
+                                component={Home}
+                            />
+                            <Scene 
+                                key="login" 
+                                title='Login' 
+                                component={Login}
+                            />
+                            <Scene 
+                                key="pedido" 
+                                title='Pedido' 
+                                component={Pedido}
+                            />
+                            <Scene 
+                                key="recardo" 
+                                title='Recardo' 
+                                component={Recardo}
+                            />
+                            <Scene 
+                                key="sobre" 
+                                title='Sobre' 
+                                component={Sobre}
+                            />
+                            <Scene 
+                                key="programacao" 
+                                title='Programação' 
+                                component={Programacao}
+                            />
+                            <Scene 
+                                key="ultimasTocadas" 
+                                title='Ultimas Tocadas' 
+                                component={UltimasTocadas}
+                            />
                         </Scene>
                     </Stack>
                 </Router>
