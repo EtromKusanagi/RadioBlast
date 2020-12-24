@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { scale } from '../assets/scaling';
 
 
 export default class FooterMenu extends Component {
@@ -23,8 +24,14 @@ export default class FooterMenu extends Component {
 }
 const styles = StyleSheet.create({
     footerMenu: {
-        height: 40,
-        backgroundColor: '#ccc',
+        position: 'absolute',
+        bottom: scale(20),
+        height: scale(70),
+        width: scale(310),
+        left: scale(20),
+        padding: scale(10),
+        borderRadius: scale(20),
+        backgroundColor: '#fff',
         flexDirection: 'row'
     },
     optionItem: {

@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 //Componentes
 import Menu from '../Component/Menu';
-import Player from '../Component/Player';
+import PlayerControl from '../Component/PlayerControl';
 
 // Screen
 import Home from "./Screens/Home";
@@ -17,13 +17,14 @@ import Sobre from "./Screens/Sobre";
 import Programacao from "./Screens/Programacao";
 import UltimasTocadas from "./Screens/UltimasTocadas";
 
+import FooterMenu from '../Component/FooterMenu';
 
-
+import { scale } from '../assets/scaling';
 
 class Rotas extends Component {
     MenuIcon = () => {
         return (
-            <Icon name='navicon'size={30} color='#fff' />
+            <Icon name='navicon'size={scale(30)} color='#fff' />
         )
     }
     LogoIcon = () => {
@@ -34,64 +35,59 @@ class Rotas extends Component {
     render(){
         return(
             <View style={styles.content}>
-                <StatusBar barStyle="light-content" backgroundColor="#1B8EF2" />
-                <Router>
+                <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
+                <Router sceneStyle={styles.backGroundScreen}>
                     <Stack key="root"
-                    navigationBarStyle={[styles.navBar,{backgroundColor: `${this.props.headerColor[0]}`}]}
-                    tintColor='#ffffff'
-                    titleStyle={styles.navBarTitle}
-                    headerLayoutPreset="center"
+                        navigationBarStyle={styles.navBar}
+                        tintColor='#ffffff'
+                        titleStyle={styles.navBarTitle}
+                        headerLayoutPreset="center"
                     >
-                        <Scene
-                        key='drawer'
-                        drawer
-                        drawerPosition="right"
-                        contentComponent={Menu}
-                        drawerWidth={300}
-                        rightTitle={this.MenuIcon}
-                        onRight={()=>{Actions.drawerOpen()}}
-                        renderLeftButton={this.LogoIcon}
-                        renderTitle={Player}
-                        hideNavBar
-                        >
                         <Scene 
                             key="home" 
                             title='Home Page' 
                             component={Home}
+                            hideNavBar
                         />
                         <Scene 
                             key="login" 
                             title='Login' 
                             component={Login}
+                            hideNavBar
                         />
                         <Scene 
                             key="pedido" 
                             title='Pedido' 
                             component={Pedido}
+                            hideNavBar
                         />
                         <Scene 
                             key="recardo" 
                             title='Recardo' 
                             component={Recardo}
+                            hideNavBar
                         />
                         <Scene 
                             key="sobre" 
                             title='Sobre' 
                             component={Sobre}
+                            hideNavBar
                         />
                         <Scene 
                             key="programacao" 
                             title='Programação' 
                             component={Programacao}
+                            hideNavBar
                         />
                         <Scene 
                             key="ultimasTocadas" 
                             title='Ultimas Tocadas' 
                             component={UltimasTocadas}
+                            hideNavBar
                         />
-                        </Scene>
                     </Stack>
                 </Router>
+                <FooterMenu />
             </View>
         )
     }
@@ -105,27 +101,27 @@ export default connect(mapStateToProps, {})(Rotas);
 
 const styles = StyleSheet.create({
     content: {
-        flex: 1
+        display: 'flex',
+        flex: 1,
+    },
+    backGroundScreen: {
+        backgroundColor: '#000'
     },
     navBar: {
-        paddingVertical: 20
+        paddingTop: scale(60),
+        paddingBottom: scale(30),
+        backgroundColor: '#99CC00',
     },
     navBarTitle:{
         color:'#FFFFFF'
     },
-    contentePlayer: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '70%',
-        marginLeft: '30%'
-    },
     btnPlayPause: {
-        paddingVertical: 20
+        paddingVertical: scale(20)
     },
     logo: {
         //position: 'absolute',
-        marginLeft: 10,
-        width: 90,
-        height: 32
+        marginLeft: scale(10),
+        width: scale(130),
+        height: scale(50)
     }
 });

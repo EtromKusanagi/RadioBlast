@@ -5,6 +5,7 @@ import {
 const INITIAL_STATE = {
     statusPlay: false,
     headerColor: [
+        '#99CC00',
         '#258BE9',
         '#2BBA4C',
         '#E85531',
