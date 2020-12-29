@@ -1,39 +1,47 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
+//import TrackPlayer from 'react-native-track-player';
+import { displayPlayer } from "../../Actions/HomePageAction";
 import { scale } from '../../assets/scaling';
+import Player from '../../Component/Player';
 
-export default class Home extends Component {
+class Home extends Component {
+    componentDidMount(){
+        fetch('https://redeblast.com/api/getStreamData').then((response) => response.json()).then((json) => {
+            console.log("RETURN: ",json);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
     render(){
         return(
             <View style={styles.content}>
                 <View style={styles.logoContent}>
-                    <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
+                    <TouchableOpacity onPress={() => this.props.displayPlayer(true)}>
+                        <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
+                    </TouchableOpacity>
                 </View>
-                <View style={styles.session}>
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center'
-                    }}>
-                        <View>
-                            <TouchableOpacity style={styles.btnPlayPause}></TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{
-                                fontSize: scale(20),
-                                lineHeight: scale(27),
-                                fontWeight: 'bold'
-                            }}>Agora na Blast!</Text>
-                            <Text style={{
-                                fontSize: scale(14),
-                                lineHeight: scale(19)
-                            }}>Playlist com o programa Playlist </Text>
-                        </View>
-                    </View>
-                </View>
+                <Animatable.View
+                    style={styles.contentPlayer}
+                    animation ={!this.props.statusDisplayPlay? 'fadeOutRight' : 'fadeInRight'}
+                    easing="ease-in-out"
+                    duration={500}
+                >
+                    <Player/>
+                </Animatable.View>
             </View>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    statusDisplayPlay:         state.HomePageReducer.statusDisplayPlay,
+});
+
+export default connect(mapStateToProps, { displayPlayer })(Home);
+
 const styles = StyleSheet.create({
     content: {
         display: 'flex',
@@ -41,29 +49,19 @@ const styles = StyleSheet.create({
     },
     logoContent: {
         height: scale(151),
-        paddingBottom: scale(24),
+        paddingBottom: scale(40),
+        paddingLeft: scale(10),
         backgroundColor: '#99CC00',
         justifyContent: 'flex-end'
     },
     logo: {
-        //position: 'absolute',
         marginLeft: scale(10),
         width: scale(130),
         height: scale(50)
     },
-    session: {
-        backgroundColor:'#fff',
-        height: scale(147),
-        borderRadius: scale(20),
+    contentPlayer: {
+        overflow:'hidden',
         marginTop: -scale(22),
-        marginHorizontal: scale(20),
-        padding: scale(20)
-    },
-    btnPlayPause: {
-        width: scale(55),
-        height: scale(55),
-        borderRadius: scale(27),
-        backgroundColor: '#99CC00',
-        marginRight: scale(15)
+        left: 0
     }
 })

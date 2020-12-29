@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { StatusBar, View, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 //Componentes
-import Menu from '../Component/Menu';
-import PlayerControl from '../Component/PlayerControl';
+// import Menu from '../Component/Menu';
+// import PlayerControl from '../Component/PlayerControl';
 
 // Screen
 import Home from "./Screens/Home";
@@ -20,6 +20,7 @@ import UltimasTocadas from "./Screens/UltimasTocadas";
 import FooterMenu from '../Component/FooterMenu';
 
 import { scale } from '../assets/scaling';
+import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
     MenuIcon = () => {
@@ -36,6 +37,7 @@ class Rotas extends Component {
         return(
             <View style={styles.content}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
+                <Image source={image} style={styles.image}/>
                 <Router sceneStyle={styles.backGroundScreen}>
                     <Stack key="root"
                         navigationBarStyle={styles.navBar}
@@ -103,9 +105,16 @@ const styles = StyleSheet.create({
     content: {
         display: 'flex',
         flex: 1,
+        backgroundColor: '#000'
+    },
+    image: {
+        flex: 1,
+        position: "absolute",
+        bottom: 0,
+        width: scale(350)
     },
     backGroundScreen: {
-        backgroundColor: '#000'
+        backgroundColor: 'rgba(0, 0, 0, 0.0)'
     },
     navBar: {
         paddingTop: scale(60),
