@@ -3,7 +3,8 @@ import {
     VOLUME,
     PLAY_LIST,
     DISPLAY_PLAY,
-    SONG_LIST
+    SONG_LIST,
+    TEAM
 } from './types';
 
 
@@ -35,5 +36,11 @@ export const getSongs = (songs) => {
     return {
         type: SONG_LIST,
         payload: songs
+    }
+}
+export const getTean = (team) => {
+    return {
+        type: TEAM,
+        payload: team
     }
 }

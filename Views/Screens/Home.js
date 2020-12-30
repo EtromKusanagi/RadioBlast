@@ -3,19 +3,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 //import TrackPlayer from 'react-native-track-player';
-import { displayPlayer, getSongs } from "../../Actions/HomePageAction";
+import { displayPlayer } from "../../Actions/HomePageAction";
 import { scale } from '../../assets/scaling';
 import Player from '../../Component/Player';
 
 class Home extends Component {
-    componentDidMount(){
-        fetch('https://redeblast.com/api/getStreamData').then((response) => response.json()).then((json) => {
-            console.log("RETURN: ",json.shoutcast);
-            this.props.getSongs(json.shoutcast.songs)
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
     render(){
         return(
             <View style={styles.content}>
@@ -39,10 +31,9 @@ class Home extends Component {
 
 const mapStateToProps = state => ({
     statusDisplayPlay:         state.HomePageReducer.statusDisplayPlay,
-    songs:                     state.HomePageReducer.songs,
 });
 
-export default connect(mapStateToProps, { displayPlayer, getSongs })(Home);
+export default connect(mapStateToProps, { displayPlayer })(Home);
 
 const styles = StyleSheet.create({
     content: {

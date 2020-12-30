@@ -3,7 +3,8 @@ import {
     VOLUME,
     PLAY_LIST,
     DISPLAY_PLAY,
-    SONG_LIST
+    SONG_LIST,
+    TEAM
 } from '../Actions/types';
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
     statusPlayList: false,
     statusDisplayPlay: true,
     songs: [],
+    team: {},
     headerColor: [
         '#99CC00',
         '#258BE9',
@@ -35,6 +37,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, statusDisplayPlay: action.payload }
         case SONG_LIST:
             return { ...state, songs: action.payload }
+        case TEAM:
+            return { ...state, team: action.payload }
         default:
             return state;
     }

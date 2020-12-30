@@ -9,20 +9,22 @@ import ListMusic from "./ListMusic";
 
 //import TrackPlayer from 'react-native-track-player';
 
-import { playPause, controlVolume, playList } from "../Actions/HomePageAction";
+import { playPause, controlVolume, playList, getSongs, getTean } from "../Actions/HomePageAction";
 
 //import ControlVolume from './ColtrolVolume';
 
 class Player extends Component {
-    // constructor(){
-    //     fetch('https://redeblast.com/api/getStreamData')
-    //     .then((response) => {
-    //         console.log(response.json());
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
+    componentDidMount(){
+        fetch('https://redeblast.com/api/getStreamData')
+        .then((response) => response.json())
+        .then((json) => {
+            console.log("RETURN: ",json.shoutcast);
+            this.props.getSongs(json.shoutcast.songs);
+            this.props.getTean(json.shoutcast.team)
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
     render(){
         return(
             <View style={styles.session}>
@@ -52,7 +54,7 @@ class Player extends Component {
                         <Text style={{
                             fontSize: scale(14),
                             lineHeight: scale(19)
-                        }}>Playlist com o programa Playlist </Text>
+                        }}>{this.props.team.team} com o programa {this.props.team.program} </Text>
                     </View>
                 </View>
                 <View style={styles.container}>
@@ -98,10 +100,12 @@ class Player extends Component {
 const mapStateToProps = state => ({
     statusPlay:         state.HomePageReducer.statusPlay,
     volume:             state.HomePageReducer.volume,
-    statusPlayList:     state.HomePageReducer.statusPlayList
+    statusPlayList:     state.HomePageReducer.statusPlayList,
+    songs:              state.HomePageReducer.songs,
+    team:               state.HomePageReducer.team,
 });
 
-export default connect(mapStateToProps, { playPause, controlVolume, playList })(Player);
+export default connect(mapStateToProps, { playPause, controlVolume, playList, getSongs, getTean })(Player);
 
 const styles = StyleSheet.create({
     session: {
