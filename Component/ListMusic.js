@@ -4,33 +4,21 @@ import { connect } from 'react-redux';
 //import TrackPlayer from 'react-native-track-player';
 import { scale } from '../assets/scaling';
 
-const musicasTocadas = [
-    { timer: '09:35', musicName: "Girls' Generation - Oh!" },
-    { timer: '09:31', musicName: "B'z - NO EXCUSE" },
-    { timer: '09:26', musicName: "清水咲斗子 - Shining Soul" },
-    { timer: '09:24', musicName: "Abertura Japonesa - Meninas Superpoderosas" },
-    { timer: '09:20', musicName: "Hatsune Miku - Mythologias End" },
-    { timer: '09:19', musicName: "Tamo na Blast! - Gangsta" },
-    { timer: '09:18', musicName: "Fox Angeluz - Blurry Eyes" },
-    { timer: '09:14', musicName: "LM.C - OH MY JULIET" },
-    { timer: '09:11', musicName: "YUI - Thank you My teens" },
-    
-];
-
 class ListMusic extends Component {
     render(){
         return(
             <FlatList
-                data={musicasTocadas}
-                keyExtractor={ item => item.timer}
+                data={this.props.songs}
+                keyExtractor={ (item, index) => index}
                 renderItem={
                     ({item}) => (
+                        item.time !== "Tocando agora" &&
                         <View style={styles.lineMusic}>
                             <Text style={styles.timerMusic}>
-                                {item.timer}
+                                {item.time}
                             </Text>
                             <Text style={styles.titleMusic} numberOfLines = {1}>
-                                {item.musicName}
+                                {item.title}
                             </Text>
                         </View>
                     )
@@ -41,7 +29,9 @@ class ListMusic extends Component {
     }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+    songs:  state.HomePageReducer.songs,
+});
 
 export default connect(mapStateToProps, {})(ListMusic);
 

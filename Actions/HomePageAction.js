@@ -2,7 +2,8 @@ import {
     PLAY_PAUSE,
     VOLUME,
     PLAY_LIST,
-    DISPLAY_PLAY
+    DISPLAY_PLAY,
+    SONG_LIST
 } from './types';
 
 
@@ -28,5 +29,11 @@ export const displayPlayer = (statusDisplayPlay) => {
     return {
         type: DISPLAY_PLAY,
         payload: statusDisplayPlay
+    }
+}
+export const getSongs = (songs) => {
+    return {
+        type: SONG_LIST,
+        payload: songs
     }
 }
