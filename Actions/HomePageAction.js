@@ -17,7 +17,7 @@ export const playPause = (statusPlay) => {
 export const controlVolume = (volume) => {
     return {
         type: VOLUME,
-        payload: volume
+        payload: parseFloat(volume).toFixed(1)
     }
 }
 export const playList = (statusPlayList) => {

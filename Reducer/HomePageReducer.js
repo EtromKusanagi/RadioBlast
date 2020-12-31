@@ -8,6 +8,7 @@ import {
 } from '../Actions/types';
 
 const INITIAL_STATE = {
+    playlist: "https://centova4.transmissaodigital.com:20143/principal;",
     statusPlay: true,
     volume: 0.2,
     statusPlayList: false,

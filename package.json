@@ -18,6 +18,7 @@
     "react-native-track-player": "^1.1.8",
     "react-native-vector-icons": "^6.6.0",
     "react-native-volume-control": "^1.0.1",
+    "react-native-video": "^5.0.2",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"

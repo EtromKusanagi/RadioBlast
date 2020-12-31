@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Slider } from "@miblanchard/react-native-slider";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as Animatable from 'react-native-animatable';
+import Video from 'react-native-video';
 import { connect } from 'react-redux';
 import { scale } from '../assets/scaling';
 import ListMusic from "./ListMusic";
@@ -14,6 +15,12 @@ import { playPause, controlVolume, playList, getSongs, getTean } from "../Action
 //import ControlVolume from './ColtrolVolume';
 
 class Player extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            volume: this.props.volume
+        }
+    }
     componentDidMount(){
         fetch('https://redeblast.com/api/getStreamData')
         .then((response) => response.json())
@@ -25,9 +32,30 @@ class Player extends Component {
             console.error(error);
         });
     }
+    componentDidUpdate(nextProps){
+        if(nextProps.volume !== this.state.volume){
+            let vol = this.props.volume;
+            console.log(parseFloat(vol).toFixed(1))
+        }
+    }
     render(){
         return(
             <View style={styles.session}>
+                <Video source={{uri: this.props.playlist}}
+                    ref={(ref) => {
+                        this.player = ref
+                    }} 
+                    audioOnly={true} 
+                    automaticallyWaitsToMinimizeStalling={true}
+                    //controls={false}
+                    paused={this.props.statusPlay}
+                    playInBackground={true}
+                    playWhenInactive={true}
+                    volume={parseFloat(this.props.volume)}
+                    onBuffer={this.onBuffer}                // Callback when remote video is buffering
+                    onError={this.videoError}               // Callback when video cannot be loaded
+                    style={styles.backgroundVideo}
+                />
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center'
@@ -63,7 +91,10 @@ class Player extends Component {
                         thumbTintColor='#99CC00'
                         maximumTrackTintColor='#CCCCCC'
                         minimumTrackTintColor='#707070'
-                        thumbTouchSize={{width: scale(15), height: scale(15)}}
+                        thumbTouchSize={{
+                            width: scale(15), 
+                            height: scale(15)
+                        }}
                         onValueChange={value => this.props.controlVolume(value)}
                     />
                     <TouchableOpacity
@@ -98,6 +129,7 @@ class Player extends Component {
 }
 
 const mapStateToProps = state => ({
+    playlist:           state.HomePageReducer.playlist,
     statusPlay:         state.HomePageReducer.statusPlay,
     volume:             state.HomePageReducer.volume,
     statusPlayList:     state.HomePageReducer.statusPlayList,
