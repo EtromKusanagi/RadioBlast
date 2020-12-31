@@ -14,7 +14,7 @@ class FooterMenu extends Component {
             <View style={styles.footerMenu}>
                 <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => this.props.displayPlayer(false)}>
+                    onPress={() => Actions.programacao()}>
                     {/* <Text>EVENTOS</Text> */}
                     <Icon name='clock'size={scale(27)} color='#000' />
                 </TouchableOpacity>

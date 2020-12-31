@@ -32,12 +32,6 @@ class Player extends Component {
             console.error(error);
         });
     }
-    componentDidUpdate(nextProps){
-        if(nextProps.volume !== this.state.volume){
-            let vol = this.props.volume;
-            console.log(parseFloat(vol).toFixed(1))
-        }
-    }
     render(){
         return(
             <View style={styles.session}>

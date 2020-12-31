@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
 import HomePageReducer from './HomePageReducer';
+import ProgramacaoPageReducer from './ProgramacaoPageReducer';
 
 export default combineReducers({
-    HomePageReducer :HomePageReducer
+    HomePageReducer:        HomePageReducer,
+    ProgramacaoPageReducer: ProgramacaoPageReducer,
 });
