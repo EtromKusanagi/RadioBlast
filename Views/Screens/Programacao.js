@@ -27,51 +27,53 @@ class Programacao extends Component {
                         <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
                     </TouchableOpacity>
                 </View>
-                <ScrollView style={styles.contentProgramacao}>
-                    {
-                        this.props.programacao.map(days => {
-                            return <View style={styles.programacaoSemana}>
-                                <View style={{flexDirection: "row"}}>
-                                    <Icon name='clock' style={styles.iconTime} />
-                                    <Text style={styles.semanaTitle}>{days.name}</Text>
+                <ScrollView>
+                    <View style={styles.contentProgramacao}>
+                        {
+                            this.props.programacao.map(days => {
+                                return <View style={styles.programacaoSemana}>
+                                    <View style={{flexDirection: "row"}}>
+                                        <Icon name='clock' style={styles.iconTime} />
+                                        <Text style={styles.semanaTitle}>{days.name}</Text>
+                                    </View>
+                                    {
+                                        days.schedule.map(prog =>
+                                            <View style={{
+                                                flexDirection: "row",
+                                                marginBottom: scale(10)
+                                            }}>
+                                                <View style={{
+                                                    paddingHorizontal: scale(20),
+                                                }}>
+                                                    <Text style={{
+                                                        fontSize: scale(20),
+                                                        fontWeight: "700"
+                                                    }}>{prog.time}</Text>
+                                                </View>
+                                                <View style={{
+                                                    paddingRight: scale(20),
+                                                    flex:1
+                                                }}>
+                                                    <Text style={{
+                                                        fontSize: scale(16),
+                                                        fontWeight: "700"
+                                                    }}>{prog.program}</Text>
+                                                    <Text style={{
+                                                        fontSize: scale(12),
+                                                    }}>{prog.style}</Text>
+                                                    <Text style={{
+                                                        fontSize: scale(12),
+                                                        color: "#666",
+                                                        display: "flex"
+                                                    }}>{prog.description}</Text>
+                                                </View>
+                                            </View>
+                                        )
+                                    }
                                 </View>
-                                {
-                                    days.schedule.map(prog =>
-                                        <View style={{
-                                            flexDirection: "row",
-                                            marginBottom: scale(10)
-                                        }}>
-                                            <View style={{
-                                                paddingHorizontal: scale(20),
-                                            }}>
-                                                <Text style={{
-                                                    fontSize: scale(20),
-                                                    fontWeight: "700"
-                                                }}>{prog.time}</Text>
-                                            </View>
-                                            <View style={{
-                                                paddingRight: scale(20),
-                                                flex:1
-                                            }}>
-                                                <Text style={{
-                                                    fontSize: scale(16),
-                                                    fontWeight: "700"
-                                                }}>{prog.program}</Text>
-                                                <Text style={{
-                                                    fontSize: scale(12),
-                                                }}>{prog.style}</Text>
-                                                <Text style={{
-                                                    fontSize: scale(12),
-                                                    color: "#666",
-                                                    display: "flex"
-                                                }}>{prog.description}</Text>
-                                            </View>
-                                        </View>
-                                    )
-                                }
-                            </View>
-                        })
-                    }
+                            })
+                        }
+                    </View>
                 </ScrollView>
             </View>
         )
@@ -101,8 +103,7 @@ const styles = StyleSheet.create({
     },
     contentProgramacao: {
         overflow:'hidden',
-        marginTop: scale(20),
-        left: 0,
+        paddingTop: scale(20),
     },
     programacaoSemana: {
         backgroundColor:"#fff",

@@ -54,12 +54,10 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { displayPlayer })(FooterMenu);
 const styles = StyleSheet.create({
     footerMenu: {
-        position: 'absolute',
-        bottom: scale(20),
         height: scale(70),
-        width: scale(310),
-        left: scale(20),
         padding: scale(10),
+        marginHorizontal: scale(20),
+        marginBottom: scale(20),
         borderRadius: scale(20),
         backgroundColor: '#fff',
         flexDirection: 'row',
