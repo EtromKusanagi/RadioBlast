@@ -6,6 +6,13 @@ import { displayPlayer } from "../Actions/HomePageAction";
 import { scale } from '../assets/scaling';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import { createIconSetFromIcoMoon } from 'react-native-vector-icons';
+import icoMoonConfig from '../assets/fonts/selection.json';
+const Blast = createIconSetFromIcoMoon(
+    icoMoonConfig,
+    'redeblast',
+    'icomoon.ttf'
+);
 
 
 class FooterMenu extends Component {
@@ -27,13 +34,13 @@ class FooterMenu extends Component {
                     }]}
                     onPress={() => Actions.recardo()}>
                     {/* <Text>EQUIPE</Text> */}
-                    <Icon name='id-card'size={scale(27)} color='#000' />
+                    <Blast name='blogs'size={scale(27)} color='#000' />
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.optionItem}
                     onPress={() => Actions.recardo()}>
                     {/* <Text>EQUIPE</Text> */}
-                    <Icon name='user-friends'size={scale(27)} color='#000' />
+                    <Blast name='equipe'size={scale(27)} color='#000' />
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.optionItem,{
