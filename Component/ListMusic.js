@@ -7,24 +7,23 @@ import { scale } from '../assets/scaling';
 class ListMusic extends Component {
     render(){
         return(
-            <FlatList
-                data={this.props.songs}
-                keyExtractor={ (item, index) => index}
-                renderItem={
-                    ({item}) => (
-                        item.time !== "Tocando agora" &&
-                        <View style={styles.lineMusic}>
-                            <Text style={styles.timerMusic}>
-                                {item.time}
-                            </Text>
-                            <Text style={styles.titleMusic} numberOfLines = {1}>
-                                {item.title}
-                            </Text>
-                        </View>
+            <View>
+                {
+                    this.props.songs.map(
+                        (item, index) => {
+                        if(item.time !== "Tocando agora")
+                            return <View key={`itemUltimasTocadas-${index}`} style={styles.lineMusic}>
+                                <Text style={styles.timerMusic}>
+                                    {item.time}
+                                </Text>
+                                <Text style={styles.titleMusic} numberOfLines = {1}>
+                                    {item.title}
+                                </Text>
+                            </View>
+                        }
                     )
                 }
-            />
-                        
+            </View>
         )
     }
 }

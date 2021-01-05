@@ -21,9 +21,24 @@ class FooterMenu extends Component {
             <View style={styles.footerMenu}>
                 <TouchableOpacity
                     style={styles.optionItem}
+                    onPress={() => Actions.home()}>
+                    {/* <Text>EVENTOS</Text> */}
+                    <Icon name='home'size={scale(20)} color='#000' />
+                    <Text style={{
+                        fontSize: scale(10)
+                    }}>Inicio</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.optionItem,{
+                        borderLeftWidth: 2,
+                        borderLeftColor: '#707070',
+                    }]}
                     onPress={() => Actions.programacao()}>
                     {/* <Text>EVENTOS</Text> */}
-                    <Icon name='clock'size={scale(27)} color='#000' />
+                    <Icon name='clock'size={scale(20)} color='#000' />
+                    <Text style={{
+                        fontSize: scale(10)
+                    }}>Programação</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.optionItem,{
@@ -34,22 +49,19 @@ class FooterMenu extends Component {
                     }]}
                     onPress={() => Actions.recardo()}>
                     {/* <Text>EQUIPE</Text> */}
-                    <Blast name='blogs'size={scale(27)} color='#000' />
+                    <Icon name='comment-alt'size={scale(20)} color='#000' />
+                    <Text style={{
+                        fontSize: scale(10)
+                    }}>Recado</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.optionItem}
                     onPress={() => Actions.recardo()}>
                     {/* <Text>EQUIPE</Text> */}
-                    <Blast name='equipe'size={scale(27)} color='#000' />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.optionItem,{
-                        borderLeftWidth: 2,
-                        borderLeftColor: '#707070',
-                    }]}
-                    onPress={() => Actions.recardo()}>
-                    {/* <Text>EQUIPE</Text> */}
-                    <Icon name='book-open'size={scale(27)} color='#000' />
+                    <Icon name='music'size={scale(20)} color='#000' />
+                    <Text style={{
+                        fontSize: scale(10)
+                    }}>Música</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -61,11 +73,11 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { displayPlayer })(FooterMenu);
 const styles = StyleSheet.create({
     footerMenu: {
-        height: scale(70),
+        height: scale(50),
         padding: scale(10),
         marginHorizontal: scale(20),
-        marginBottom: scale(20),
-        borderRadius: scale(20),
+        marginVertical: scale(5),
+        borderRadius: scale(10),
         backgroundColor: '#fff',
         flexDirection: 'row',
         alignItems: 'center',

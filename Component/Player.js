@@ -7,6 +7,7 @@ import Video from 'react-native-video';
 import { connect } from 'react-redux';
 import { scale } from '../assets/scaling';
 import ListMusic from "./ListMusic";
+import api from '../services/api';
 
 //import TrackPlayer from 'react-native-track-player';
 
@@ -18,20 +19,26 @@ class Player extends Component {
     constructor(props){
         super(props);
         this.state = {
-            volume: this.props.volume
+            volume: this.props.volume,
         }
     }
     componentDidMount(){
-        fetch('https://redeblast.com/api/getStreamData')
-        .then((response) => response.json())
-        .then((json) => {
-            console.log("RETURN: ",json.shoutcast);
-            this.props.getSongs(json.shoutcast.songs);
-            this.props.getTean(json.shoutcast.team)
-        }).catch((error) => {
-            console.error(error);
-        });
+        this.getList()
     }
+    getList = () => api.get("getStreamData")
+    .then((response) => {
+        console.log("getStreamData: ", response.data.shoutcast)
+        if(this.props.songs !== response.data.shoutcast.songs){
+            this.props.getSongs(response.data.shoutcast.songs);
+        }
+        if(this.props.team !== response.data.shoutcast.team){
+            this.props.getTean(response.data.shoutcast.team);
+        }
+        setTimeout(() => this.getList(), 10000);
+    })
+    .catch((err) => {
+        console.error("ops! ocorreu um erro" + err);
+    });
     render(){
         return(
             <View style={styles.session}>
@@ -138,7 +145,6 @@ const styles = StyleSheet.create({
         backgroundColor:'#fff',
         minHeight: scale(147),
         borderRadius: scale(20),
-        marginHorizontal: scale(20),
         padding: scale(20)
     },
     contentMusicList: {

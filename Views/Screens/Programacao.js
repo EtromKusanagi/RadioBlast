@@ -9,12 +9,12 @@ import { scale } from '../../assets/scaling';
 
 
 class Programacao extends Component {
-    componentDidMount(){
-        fetch('https://redeblast.com/api/getSchedule')
+    async componentDidMount(){
+        await fetch('https://redeblast.com/api/getSchedule')
         .then((response) => response.json())
-        .then((json) => {
+        .then(async (json) => {
             console.log("RETURN: ",json);
-            this.props.getProgramacaoList(json.days)
+            await this.props.getProgramacaoList(json.days)
         }).catch((error) => {
             console.error(error);
         });
@@ -30,15 +30,15 @@ class Programacao extends Component {
                 <ScrollView>
                     <View style={styles.contentProgramacao}>
                         {
-                            this.props.programacao.map(days => {
-                                return <View style={styles.programacaoSemana}>
+                            this.props.programacao.map((days,index) => {
+                                return <View key={`programa-${index}`} style={styles.programacaoSemana}>
                                     <View style={{flexDirection: "row"}}>
                                         <Icon name='clock' style={styles.iconTime} />
                                         <Text style={styles.semanaTitle}>{days.name}</Text>
                                     </View>
                                     {
-                                        days.schedule.map(prog =>
-                                            <View style={{
+                                        days.schedule.map((prog, ind) =>
+                                            <View key={`programa-${index}-${ind}`} style={{
                                                 flexDirection: "row",
                                                 marginBottom: scale(10)
                                             }}>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     logoContent: {
-        height: scale(151),
+        height: scale(111),
         paddingBottom: scale(40),
         paddingLeft: scale(10),
         backgroundColor: '#99CC00',

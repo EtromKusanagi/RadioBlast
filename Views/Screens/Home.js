@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     logoContent: {
-        height: scale(151),
+        height: scale(111),
         paddingBottom: scale(40),
         paddingLeft: scale(10),
         backgroundColor: '#99CC00',
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     contentPlayer: {
         overflow:'hidden',
         marginTop: -scale(22),
-        left: 0
+        marginHorizontal: scale(20)
     }
 })
