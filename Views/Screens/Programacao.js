@@ -6,17 +6,18 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { displayPlayer } from "../../Actions/HomePageAction";
 import { getProgramacaoList } from "../../Actions/ProgramacaoPageAction";
 import { scale } from '../../assets/scaling';
+import api from '../../services/api';
 
 
 class Programacao extends Component {
-    async componentDidMount(){
-        await fetch('https://redeblast.com/api/getSchedule')
-        .then((response) => response.json())
-        .then(async (json) => {
-            console.log("RETURN: ",json);
-            await this.props.getProgramacaoList(json.days)
-        }).catch((error) => {
-            console.error(error);
+    componentDidMount(){
+        api.get("getSchedule")
+        .then((response) => {
+            console.log("getSchedule: ", response.data)
+            this.props.getProgramacaoList(response.data.days)
+        })
+        .catch((err) => {
+            console.error("ops! ocorreu um erro" + err);
         });
     }
     render(){
