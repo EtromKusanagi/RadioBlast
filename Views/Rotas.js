@@ -52,12 +52,6 @@ class Rotas extends Component {
                             hideNavBar
                         />
                         <Scene 
-                            key="login" 
-                            title='Login' 
-                            component={Login}
-                            hideNavBar
-                        />
-                        <Scene 
                             key="pedido" 
                             title='Pedido' 
                             component={Pedido}
@@ -70,21 +64,9 @@ class Rotas extends Component {
                             hideNavBar
                         />
                         <Scene 
-                            key="sobre" 
-                            title='Sobre' 
-                            component={Sobre}
-                            hideNavBar
-                        />
-                        <Scene 
                             key="programacao" 
                             title='Programação' 
                             component={Programacao}
-                            hideNavBar
-                        />
-                        <Scene 
-                            key="ultimasTocadas" 
-                            title='Ultimas Tocadas' 
-                            component={UltimasTocadas}
                             hideNavBar
                         />
                     </Stack>

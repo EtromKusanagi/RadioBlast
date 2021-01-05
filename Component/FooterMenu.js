@@ -56,7 +56,7 @@ class FooterMenu extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => Actions.recardo()}>
+                    onPress={() => Actions.pedido()}>
                     {/* <Text>EQUIPE</Text> */}
                     <Icon name='music'size={scale(20)} color='#000' />
                     <Text style={{
