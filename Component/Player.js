@@ -74,7 +74,7 @@ class Player extends Component {
                             }
                         </TouchableOpacity>
                     </View>
-                    <View>
+                    <View style={{flex:1}}>
                         <Text style={{
                             fontSize: scale(20),
                             lineHeight: scale(27),
@@ -82,7 +82,7 @@ class Player extends Component {
                         }}>Agora na Blast!</Text>
                         <Text style={{
                             fontSize: scale(14),
-                            lineHeight: scale(19)
+                            lineHeight: scale(19),
                         }}>{this.props.team.team} com o programa {this.props.team.program} </Text>
                     </View>
                 </View>
