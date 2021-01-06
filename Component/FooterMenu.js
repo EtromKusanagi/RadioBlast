@@ -40,6 +40,8 @@ class FooterMenu extends Component {
                         fontSize: scale(10)
                     }}>Programação</Text>
                 </TouchableOpacity>
+                {
+                this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={[styles.optionItem,{
                         borderLeftWidth: 2,
@@ -54,6 +56,10 @@ class FooterMenu extends Component {
                         fontSize: scale(10)
                     }}>Recado</Text>
                 </TouchableOpacity>
+                }
+
+                {
+                this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={styles.optionItem}
                     onPress={() => Actions.pedido()}>
@@ -63,12 +69,14 @@ class FooterMenu extends Component {
                         fontSize: scale(10)
                     }}>Música</Text>
                 </TouchableOpacity>
+                }
             </View>
         )
     }
 }
 const mapStateToProps = state => ({
-    statusDisplayPlay:         state.HomePageReducer.statusDisplayPlay,
+    statusDisplayPlay:          state.HomePageReducer.statusDisplayPlay,
+    team:                       state.HomePageReducer.team,
 });
 export default connect(mapStateToProps, { displayPlayer })(FooterMenu);
 const styles = StyleSheet.create({
