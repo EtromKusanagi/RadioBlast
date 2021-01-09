@@ -18,6 +18,7 @@ import Programacao from "./Screens/Programacao";
 import UltimasTocadas from "./Screens/UltimasTocadas";
 
 import FooterMenu from '../Component/FooterMenu';
+import Audio from '../Component/Audio';
 
 import { scale } from '../assets/scaling';
 import image from '../assets/images/fundo.png';
@@ -72,13 +73,13 @@ class Rotas extends Component {
                     </Stack>
                 </Router>
                 <FooterMenu />
+                <Audio />
             </View>
         )
     }
 }
-
 const mapStateToProps = state => ({
-    headerColor:        state.HomePageReducer.headerColor
+    headerColor:        state.HomePageReducer.headerColor,
 });
 
 export default connect(mapStateToProps, {})(Rotas);

@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Slider } from "@miblanchard/react-native-slider";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as Animatable from 'react-native-animatable';
-import Video from 'react-native-video';
 import { connect } from 'react-redux';
 import { scale } from '../assets/scaling';
 import ListMusic from "./ListMusic";
@@ -42,21 +41,6 @@ class Player extends Component {
     render(){
         return(
             <View style={styles.session}>
-                <Video source={{uri: this.props.playlist}}
-                    ref={(ref) => {
-                        this.player = ref
-                    }} 
-                    audioOnly={true} 
-                    automaticallyWaitsToMinimizeStalling={true}
-                    //controls={false}
-                    paused={this.props.statusPlay}
-                    playInBackground={true}
-                    playWhenInactive={true}
-                    volume={parseFloat(this.props.volume)}
-                    onBuffer={this.onBuffer}                // Callback when remote video is buffering
-                    onError={this.videoError}               // Callback when video cannot be loaded
-                    style={styles.backgroundVideo}
-                />
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center'
@@ -130,10 +114,9 @@ class Player extends Component {
 }
 
 const mapStateToProps = state => ({
-    playlist:           state.HomePageReducer.playlist,
     statusPlay:         state.HomePageReducer.statusPlay,
-    volume:             state.HomePageReducer.volume,
     statusPlayList:     state.HomePageReducer.statusPlayList,
+    volume:             state.HomePageReducer.volume,
     songs:              state.HomePageReducer.songs,
     team:               state.HomePageReducer.team,
 });
