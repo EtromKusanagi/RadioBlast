@@ -10,12 +10,9 @@ import { connect } from 'react-redux';
 
 // Screen
 import Home from "./Screens/Home";
-import Login from "./Screens/Login";
 import Pedido from "./Screens/Pedido";
 import Recardo from "./Screens/Recardo";
-import Sobre from "./Screens/Sobre";
 import Programacao from "./Screens/Programacao";
-import UltimasTocadas from "./Screens/UltimasTocadas";
 
 import FooterMenu from '../Component/FooterMenu';
 import Audio from '../Component/Audio';
