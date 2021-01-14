@@ -27,7 +27,13 @@ export default class Recardo extends Component {
                 data: `name=${this.state.name}&message=${this.state.message}`
             });
             console.log("sendRequestMessage: ", res)
-            this.setState({error: false})
+            if(res.data.sended === true){
+                this.setState({
+                    name: null,
+                    message: null,
+                    error: false
+                });
+            }
         }
     }
     render(){

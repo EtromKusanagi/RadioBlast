@@ -31,7 +31,15 @@ export default class Pedido extends Component {
                 data: `artist=${this.state.artist}&music=${this.state.music}&name=${this.state.name}&message=${this.state.message}`
             });
             console.log("sendRequestMusical: ", res.data)
-            this.setState({error: false})
+            if(res.data.sended === true){
+                this.setState({
+                    artist: null,
+                    music: null,
+                    name: null,
+                    message: null,
+                    error: false
+                });
+            }
         }
     }
     render(){

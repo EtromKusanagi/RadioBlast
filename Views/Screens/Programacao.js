@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 import { displayPlayer } from "../../Actions/HomePageAction";
 import { getProgramacaoList } from "../../Actions/ProgramacaoPageAction";
 import { scale } from '../../assets/scaling';
 import api from '../../services/api';
+import ProgramacaoDia from '../../Component/ProgramaDia';
 
 
 class Programacao extends Component {
@@ -32,46 +31,7 @@ class Programacao extends Component {
                     <View style={styles.contentProgramacao}>
                         {
                             this.props.programacao.map((days,index) => {
-                                return <View key={`programa-${index}`} style={styles.programacaoSemana}>
-                                    <View style={{flexDirection: "row"}}>
-                                        <Icon name='clock' style={styles.iconTime} />
-                                        <Text style={styles.semanaTitle}>{days.name}</Text>
-                                    </View>
-                                    {
-                                        days.schedule.map((prog, ind) =>
-                                            <View key={`programa-${index}-${ind}`} style={{
-                                                flexDirection: "row",
-                                                marginBottom: scale(10)
-                                            }}>
-                                                <View style={{
-                                                    paddingHorizontal: scale(20),
-                                                }}>
-                                                    <Text style={{
-                                                        fontSize: scale(20),
-                                                        fontWeight: "700"
-                                                    }}>{prog.time}</Text>
-                                                </View>
-                                                <View style={{
-                                                    paddingRight: scale(20),
-                                                    flex:1
-                                                }}>
-                                                    <Text style={{
-                                                        fontSize: scale(16),
-                                                        fontWeight: "700"
-                                                    }}>{prog.program}</Text>
-                                                    <Text style={{
-                                                        fontSize: scale(12),
-                                                    }}>{prog.style}</Text>
-                                                    <Text style={{
-                                                        fontSize: scale(12),
-                                                        color: "#666",
-                                                        display: "flex"
-                                                    }}>{prog.description}</Text>
-                                                </View>
-                                            </View>
-                                        )
-                                    }
-                                </View>
+                                return <ProgramacaoDia key={`programa-${index}`} days={days} />
                             })
                         }
                     </View>
