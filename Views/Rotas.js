@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, ImageBackground, TouchableOpacity, StyleSheet } from 'react-native';
+import { StatusBar, View, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
+import * as Animatable from 'react-native-animatable';
 //Componentes
 // import Menu from '../Component/Menu';
 // import PlayerControl from '../Component/PlayerControl';
@@ -21,6 +22,21 @@ import { scale } from '../assets/scaling';
 import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            active: "home"
+        }
+    }
+    componentDidMount(){
+        this.transitionPage()
+    }
+    transitionPage = (active) => {
+        if(active !== undefined){
+            console.log("ACTIVE: ", this.state.active)
+            this.setState({active})
+        }
+    }
     MenuIcon = () => {
         return (
             <Icon name='navicon'size={scale(30)} color='#fff' />
@@ -36,7 +52,42 @@ class Rotas extends Component {
             <View style={styles.content}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
                 <Image source={image} style={styles.image}/>
-                <Router sceneStyle={styles.backGroundScreen}>
+                <View style={styles.logoContent}>
+                    <TouchableOpacity onPress={() => this.props.displayPlayer(true)}>
+                        <Image source={require("../assets/images/logo.png")} style={styles.logo} />
+                    </TouchableOpacity>
+                </View>
+                <View style={{flex: 1, flexDirection: "row"}}>
+                    <Animatable.View style={{width: scale(350), position: "absolute", left: this.state.active === "home" ? 0 : -scale(350)}}
+                        duration={500}
+                        transition={['left']}
+                        easing="ease-in-out"
+                    >
+                        <Home/>
+                    </Animatable.View>
+                    <Animatable.View style={{width: scale(350), position: "relative", left: this.state.active === "programacao" ? 0 : -scale(350)}}
+                        duration={500}
+                        transition={['left']}
+                        easing="ease-in-out"
+                    >
+                        <Programacao/>
+                    </Animatable.View>
+                    <Animatable.View style={{width: scale(350), position: "absolute", left: this.state.active === "pedido" ? 0 : -scale(350)}}
+                        duration={500}
+                        transition={['left']}
+                        easing="ease-in-out"
+                    >
+                        <Pedido/>
+                    </Animatable.View>
+                    <Animatable.View style={{width: scale(350), position: "absolute", left: this.state.active === "recardo" ? 0 : -scale(350)}}
+                        duration={500}
+                        transition={['left']}
+                        easing="ease-in-out"
+                    >
+                        <Recardo/>
+                    </Animatable.View>
+                </View>
+                {/* <Router sceneStyle={styles.backGroundScreen}>
                     <Stack key="root"
                         navigationBarStyle={styles.navBar}
                         tintColor='#ffffff'
@@ -68,8 +119,8 @@ class Rotas extends Component {
                             hideNavBar
                         />
                     </Stack>
-                </Router>
-                <FooterMenu />
+                </Router> */}
+                <FooterMenu transitionPage={this.transitionPage} />
                 <Audio />
             </View>
         )
@@ -88,13 +139,20 @@ const styles = StyleSheet.create({
         backgroundColor: '#000'
     },
     image: {
-        flex: 1,
         position: "absolute",
         bottom: 0,
-        width: scale(350)
+        width: scale(350),
+        zIndex: 0
+    },
+    logoContent: {
+        height: scale(111),
+        paddingBottom: scale(25),
+        paddingLeft: scale(10),
+        backgroundColor: '#99CC00',
+        justifyContent: 'flex-end'
     },
     backGroundScreen: {
-        backgroundColor: 'rgba(0, 0, 0, 0.0)'
+        backgroundColor: 'transparent'
     },
     navBar: {
         paddingTop: scale(60),

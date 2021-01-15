@@ -21,7 +21,7 @@ class FooterMenu extends Component {
             <View style={styles.footerMenu}>
                 <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => Actions.home()}>
+                    onPress={() => this.props.transitionPage("home")}>
                     {/* <Text>EVENTOS</Text> */}
                     <Icon name='home'size={scale(20)} color='#000' />
                     <Text style={{
@@ -33,7 +33,7 @@ class FooterMenu extends Component {
                         borderLeftWidth: 2,
                         borderLeftColor: '#707070',
                     }]}
-                    onPress={() => Actions.programacao()}>
+                    onPress={() => this.props.transitionPage("programacao")}>
                     {/* <Text>EVENTOS</Text> */}
                     <Icon name='clock'size={scale(20)} color='#000' />
                     <Text style={{
@@ -41,7 +41,7 @@ class FooterMenu extends Component {
                     }}>Programação</Text>
                 </TouchableOpacity>
                 {
-                this.props.team.team !== "Playlist" &&
+                !this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={[styles.optionItem,{
                         borderLeftWidth: 2,
@@ -49,7 +49,7 @@ class FooterMenu extends Component {
                         borderLeftColor: '#707070',
                         borderRightColor: '#707070'
                     }]}
-                    onPress={() => Actions.recardo()}>
+                    onPress={() => this.props.transitionPage("recardo")}>
                     {/* <Text>EQUIPE</Text> */}
                     <Icon name='comment-alt'size={scale(20)} color='#000' />
                     <Text style={{
@@ -59,10 +59,10 @@ class FooterMenu extends Component {
                 }
 
                 {
-                this.props.team.team !== "Playlist" &&
+                !this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => Actions.pedido()}>
+                    onPress={() => this.props.transitionPage("pedido")}>
                     {/* <Text>EQUIPE</Text> */}
                     <Icon name='music'size={scale(20)} color='#000' />
                     <Text style={{

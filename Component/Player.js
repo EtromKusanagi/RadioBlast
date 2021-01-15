@@ -8,11 +8,8 @@ import { scale } from '../assets/scaling';
 import ListMusic from "./ListMusic";
 import api from '../services/api';
 
-//import TrackPlayer from 'react-native-track-player';
 
 import { playPause, controlVolume, playList, getSongs, getTean } from "../Actions/HomePageAction";
-
-//import ControlVolume from './ColtrolVolume';
 
 class Player extends Component {
     constructor(props){
@@ -24,16 +21,23 @@ class Player extends Component {
     componentDidMount(){
         this.getList()
     }
+    sleep = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
     getList = () => api.get("getStreamData")
     .then((response) => {
-        console.log("getStreamData: ", response.data.shoutcast)
-        if(this.props.songs !== response.data.shoutcast.songs){
-            this.props.getSongs(response.data.shoutcast.songs);
+        if(response.data && response.data.shoutcast){
+            console.log("getStreamData: ", response.data.shoutcast)
+            if(this.props.songs !== response.data.shoutcast.songs){
+                this.props.getSongs(response.data.shoutcast.songs);
+            }
+            if(this.props.team !== response.data.shoutcast.team){
+                this.props.getTean(response.data.shoutcast.team);
+            }
+            this.sleep(60000)
+            .then(() => this.getList())
+            //setTimeout(async() => awa this.getList(), 10000);
         }
-        if(this.props.team !== response.data.shoutcast.team){
-            this.props.getTean(response.data.shoutcast.team);
-        }
-        setTimeout(() => this.getList(), 10000);
     })
     .catch((err) => {
         console.error("ops! ocorreu um erro" + err);

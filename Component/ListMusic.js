@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { connect } from 'react-redux';
-//import TrackPlayer from 'react-native-track-player';
 import { scale } from '../assets/scaling';
 
 class ListMusic extends Component {

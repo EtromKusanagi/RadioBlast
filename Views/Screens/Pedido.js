@@ -45,11 +45,6 @@ export default class Pedido extends Component {
     render(){
         return(
             <View style={styles.content}>
-                <View style={styles.logoContent}>
-                    <TouchableOpacity>
-                        <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
-                    </TouchableOpacity>
-                </View>
                 <View style={{
                     paddingVertical: scale(20),
                     marginHorizontal: scale(20),
@@ -84,7 +79,7 @@ export default class Pedido extends Component {
                         onChangeText={text => this.setState({name: text})}
                     />
                     <TextInput
-                        style={[styles.input, { textAlignVertical: "top"}]}
+                        style={[styles.input, { minHeight: scale(120),textAlignVertical: "top"}]}
                         value={this.state.message}
                         multiline={true}
                         numberOfLines={10}
@@ -110,21 +105,10 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
     },
-    logoContent: {
-        height: scale(111),
-        paddingBottom: scale(40),
-        paddingLeft: scale(10),
-        backgroundColor: '#99CC00',
-        justifyContent: 'flex-end'
-    },
-    logo: {
-        marginLeft: scale(10),
-        width: scale(130),
-        height: scale(50)
-    },
     input: {
         backgroundColor: "#fff",
         paddingHorizontal: scale(20),
+        height: scale(40),
         borderRadius: scale(10),
         marginBottom: scale(10),
     },

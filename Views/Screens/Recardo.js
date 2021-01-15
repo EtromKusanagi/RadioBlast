@@ -39,11 +39,6 @@ export default class Recardo extends Component {
     render(){
         return(
             <View style={styles.content}>
-                <View style={styles.logoContent}>
-                    <TouchableOpacity>
-                        <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
-                    </TouchableOpacity>
-                </View>
                 <View style={{
                     paddingVertical: scale(20),
                     marginHorizontal: scale(20),
@@ -92,18 +87,6 @@ const styles = StyleSheet.create({
     content: {
         display: 'flex',
         flex: 1,
-    },
-    logoContent: {
-        height: scale(111),
-        paddingBottom: scale(40),
-        paddingLeft: scale(10),
-        backgroundColor: '#99CC00',
-        justifyContent: 'flex-end'
-    },
-    logo: {
-        marginLeft: scale(10),
-        width: scale(130),
-        height: scale(50)
     },
     input: {
         backgroundColor: "#fff",

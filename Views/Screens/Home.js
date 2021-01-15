@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
-//import TrackPlayer from 'react-native-track-player';
 import { displayPlayer } from "../../Actions/HomePageAction";
 import { scale } from '../../assets/scaling';
 import Player from '../../Component/Player';
@@ -11,19 +10,9 @@ class Home extends Component {
     render(){
         return(
             <View style={styles.content}>
-                <View style={styles.logoContent}>
-                    <TouchableOpacity onPress={() => this.props.displayPlayer(true)}>
-                        <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
-                    </TouchableOpacity>
-                </View>
-                <Animatable.View
-                    style={styles.contentPlayer}
-                    animation ={!this.props.statusDisplayPlay? 'fadeOutRight' : 'fadeInRight'}
-                    easing="ease-in-out"
-                    duration={500}
-                >
+                <View style={styles.contentPlayer}>
                     <Player/>
-                </Animatable.View>
+                </View>
             </View>
         )
     }
@@ -39,18 +28,6 @@ const styles = StyleSheet.create({
     content: {
         display: 'flex',
         flex: 1,
-    },
-    logoContent: {
-        height: scale(111),
-        paddingBottom: scale(40),
-        paddingLeft: scale(10),
-        backgroundColor: '#99CC00',
-        justifyContent: 'flex-end'
-    },
-    logo: {
-        marginLeft: scale(10),
-        width: scale(130),
-        height: scale(50)
     },
     contentPlayer: {
         overflow:'hidden',

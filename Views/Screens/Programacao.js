@@ -22,12 +22,7 @@ class Programacao extends Component {
     render(){
         return(
             <View style={styles.content}>
-                <View style={styles.logoContent}>
-                    <TouchableOpacity onPress={() => this.props.displayPlayer(true)}>
-                        <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
-                    </TouchableOpacity>
-                </View>
-                <ScrollView>
+                <ScrollView  contentContainerStyle={{ flexGrow: 1 }}>
                     <View style={styles.contentProgramacao}>
                         {
                             this.props.programacao.map((days,index) => {
@@ -63,6 +58,7 @@ const styles = StyleSheet.create({
         height: scale(50)
     },
     contentProgramacao: {
+        flex:1,
         overflow:'hidden',
         paddingTop: scale(20),
     },
