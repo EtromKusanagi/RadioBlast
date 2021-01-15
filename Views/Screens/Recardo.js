@@ -14,6 +14,13 @@ export default class Recardo extends Component {
             error: false
         }
     }
+    componentDidUpdate(prevProps,prevState){
+        let that = this;
+        console.log("prevState: ", prevState, "State: ", this.state)
+        if(prevState.error !== this.state.error && this.state.error === true){
+            setTimeout(function(){that.setState({error: false})},10000)
+        }
+    }
     onSubmit = async () => {
         if(
             (this.state.name === "" || this.state.name === null) ||
@@ -61,7 +68,7 @@ export default class Recardo extends Component {
                         onChangeText={text => this.setState({name:text})}
                     />
                     <TextInput
-                        style={[styles.input, { textAlignVertical: "top"}]}
+                        style={[styles.input, { minHeight: scale(120),textAlignVertical: "top"}]}
                         multiline={true}
                         numberOfLines={10}
                         placeholder="sua mensagem"
@@ -91,6 +98,7 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: "#fff",
         paddingHorizontal: scale(20),
+        height: scale(40),
         borderRadius: scale(10),
         marginBottom: scale(10)
     },
