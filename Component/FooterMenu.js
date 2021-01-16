@@ -41,7 +41,7 @@ class FooterMenu extends Component {
                     }}>Programação</Text>
                 </TouchableOpacity>
                 {
-                !this.props.team.team !== "Playlist" &&
+                this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={[styles.optionItem,{
                         borderLeftWidth: 2,
@@ -59,7 +59,7 @@ class FooterMenu extends Component {
                 }
 
                 {
-                !this.props.team.team !== "Playlist" &&
+                this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={styles.optionItem}
                     onPress={() => this.props.transitionPage("pedido")}>
