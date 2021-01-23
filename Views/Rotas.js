@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StatusBar, View, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Router, Stack, Scene, Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import * as Animatable from 'react-native-animatable';
@@ -22,21 +21,6 @@ import { scale } from '../assets/scaling';
 import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            active: "home"
-        }
-    }
-    componentDidMount(){
-        this.transitionPage()
-    }
-    transitionPage = (active) => {
-        if(active !== undefined){
-            console.log("ACTIVE: ", this.state.active)
-            this.setState({active})
-        }
-    }
     MenuIcon = () => {
         return (
             <Icon name='navicon'size={scale(30)} color='#fff' />
@@ -48,78 +32,64 @@ class Rotas extends Component {
         )
     }
     render(){
+        console.log("TEAM: ", this.props.team)
         return(
             <View style={styles.content}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
                 <Image source={image} style={styles.image}/>
                 <View style={styles.logoContent}>
-                    <TouchableOpacity onPress={() => this.props.displayPlayer(true)}>
-                        <Image source={require("../assets/images/logo.png")} style={styles.logo} />
-                    </TouchableOpacity>
+                    <Image source={require("../assets/images/logo.png")} style={styles.logo} />
                 </View>
                 <View style={{flex: 1, flexDirection: "row"}}>
-                    <Animatable.View style={{width: scale(350), position: "absolute", left: this.state.active === "home" ? 0 : -scale(350)}}
+                    <Animatable.View style={{
+                            width: scale(350), 
+                            position: "absolute", 
+                            left: this.props.activePage === "home" ? 0 : scale(350),
+                            opacity: this.props.activePage === "home" ? 1 : 0
+                        }}
                         duration={500}
-                        transition={['left']}
+                        transition={['left','opacity']}
                         easing="ease-in-out"
                     >
                         <Home/>
                     </Animatable.View>
-                    <Animatable.View style={{width: scale(350), position: "relative", left: this.state.active === "programacao" ? 0 : -scale(350)}}
+                    <Animatable.View style={{
+                           width: scale(350), 
+                           position: "relative", 
+                           left: this.props.activePage === "programacao" ? 0 : scale(350),
+                           opacity: this.props.activePage === "programacao" ? 1 : 0
+                        }}
                         duration={500}
-                        transition={['left']}
+                        transition={['left','opacity']}
                         easing="ease-in-out"
                     >
                         <Programacao/>
                     </Animatable.View>
-                    <Animatable.View style={{width: scale(350), position: "absolute", left: this.state.active === "pedido" ? 0 : -scale(350)}}
+                    <Animatable.View style={{
+                            width: scale(350), 
+                            position: "absolute", 
+                            left: this.props.activePage === "pedido" ? 0 : scale(350),
+                            opacity: this.props.activePage === "pedido" ? 1 : 0
+                        }}
                         duration={500}
-                        transition={['left']}
+                        transition={['left','opacity']}
                         easing="ease-in-out"
                     >
                         <Pedido/>
                     </Animatable.View>
-                    <Animatable.View style={{width: scale(350), position: "absolute", left: this.state.active === "recardo" ? 0 : -scale(350)}}
+                    <Animatable.View style={{
+                            width: scale(350), 
+                            position: "absolute", 
+                            left: this.props.activePage === "recardo" ? 0 : scale(350),
+                            opacity: this.props.activePage === "recardo" ? 1 : 0
+                        }}
                         duration={500}
-                        transition={['left']}
+                        transition={['left','opacity']}
                         easing="ease-in-out"
                     >
                         <Recardo/>
                     </Animatable.View>
                 </View>
-                {/* <Router sceneStyle={styles.backGroundScreen}>
-                    <Stack key="root"
-                        navigationBarStyle={styles.navBar}
-                        tintColor='#ffffff'
-                        titleStyle={styles.navBarTitle}
-                        headerLayoutPreset="center"
-                    >
-                        <Scene 
-                            key="home" 
-                            title='Home Page' 
-                            component={Home}
-                            hideNavBar
-                        />
-                        <Scene 
-                            key="pedido" 
-                            title='Pedido' 
-                            component={Pedido}
-                            hideNavBar
-                        />
-                        <Scene 
-                            key="recardo" 
-                            title='Recardo' 
-                            component={Recardo}
-                            hideNavBar
-                        />
-                        <Scene 
-                            key="programacao" 
-                            title='Programação' 
-                            component={Programacao}
-                            hideNavBar
-                        />
-                    </Stack>
-                </Router> */}
                 <FooterMenu transitionPage={this.transitionPage} />
                 <Audio />
             </View>
@@ -128,6 +98,9 @@ class Rotas extends Component {
 }
 const mapStateToProps = state => ({
     headerColor:        state.HomePageReducer.headerColor,
+    activePage:         state.HomePageReducer.activePage,
+    songs:              state.HomePageReducer.songs,
+    team:               state.HomePageReducer.team
 });
 
 export default connect(mapStateToProps, {})(Rotas);

@@ -4,7 +4,8 @@ import {
     PLAY_LIST,
     DISPLAY_PLAY,
     SONG_LIST,
-    TEAM
+    TEAM,
+    ACTIVE_PAGE
 } from '../Actions/types';
 
 const INITIAL_STATE = {
@@ -15,6 +16,7 @@ const INITIAL_STATE = {
     statusDisplayPlay: true,
     songs: [],
     team: {},
+    activePage: "home",
     headerColor: [
         '#99CC00',
         '#258BE9',
@@ -40,6 +42,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, songs: action.payload }
         case TEAM:
             return { ...state, team: action.payload }
+        case ACTIVE_PAGE:
+            return { ...state, activePage: action.payload }
         default:
             return state;
     }

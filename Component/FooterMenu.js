@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { displayPlayer } from "../Actions/HomePageAction";
+import { setActivePage } from "../Actions/HomePageAction";
 import { scale } from '../assets/scaling';
 
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -21,7 +21,7 @@ class FooterMenu extends Component {
             <View style={styles.footerMenu}>
                 <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => this.props.transitionPage("home")}>
+                    onPress={() => this.props.setActivePage("home")}>
                     {/* <Text>EVENTOS</Text> */}
                     <Icon name='home'size={scale(20)} color='#000' />
                     <Text style={{
@@ -33,7 +33,7 @@ class FooterMenu extends Component {
                         borderLeftWidth: 2,
                         borderLeftColor: '#707070',
                     }]}
-                    onPress={() => this.props.transitionPage("programacao")}>
+                    onPress={() => this.props.setActivePage("programacao")}>
                     {/* <Text>EVENTOS</Text> */}
                     <Icon name='clock'size={scale(20)} color='#000' />
                     <Text style={{
@@ -41,7 +41,7 @@ class FooterMenu extends Component {
                     }}>Programação</Text>
                 </TouchableOpacity>
                 {
-                this.props.team.team !== "Playlist" &&
+                this.props.team.team && this.props.team.team !== "Playlist" && 
                 <TouchableOpacity
                     style={[styles.optionItem,{
                         borderLeftWidth: 2,
@@ -49,7 +49,7 @@ class FooterMenu extends Component {
                         borderLeftColor: '#707070',
                         borderRightColor: '#707070'
                     }]}
-                    onPress={() => this.props.transitionPage("recardo")}>
+                    onPress={() => this.props.setActivePage("recardo")}>
                     {/* <Text>EQUIPE</Text> */}
                     <Icon name='comment-alt'size={scale(20)} color='#000' />
                     <Text style={{
@@ -59,10 +59,10 @@ class FooterMenu extends Component {
                 }
 
                 {
-                this.props.team.team !== "Playlist" &&
+                this.props.team.team && this.props.team.team !== "Playlist" &&
                 <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => this.props.transitionPage("pedido")}>
+                    onPress={() => this.props.setActivePage("pedido")}>
                     {/* <Text>EQUIPE</Text> */}
                     <Icon name='music'size={scale(20)} color='#000' />
                     <Text style={{
@@ -75,10 +75,9 @@ class FooterMenu extends Component {
     }
 }
 const mapStateToProps = state => ({
-    statusDisplayPlay:          state.HomePageReducer.statusDisplayPlay,
     team:                       state.HomePageReducer.team,
 });
-export default connect(mapStateToProps, { displayPlayer })(FooterMenu);
+export default connect(mapStateToProps, { setActivePage })(FooterMenu);
 const styles = StyleSheet.create({
     footerMenu: {
         height: scale(50),

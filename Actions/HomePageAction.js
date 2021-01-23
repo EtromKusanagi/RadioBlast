@@ -4,7 +4,8 @@ import {
     PLAY_LIST,
     DISPLAY_PLAY,
     SONG_LIST,
-    TEAM
+    TEAM,
+    ACTIVE_PAGE
 } from './types';
 
 
@@ -42,5 +43,12 @@ export const getTean = (team) => {
     return {
         type: TEAM,
         payload: team
+    }
+}
+
+export const setActivePage = (activePage) => {
+    return {
+        type: ACTIVE_PAGE,
+        payload: activePage
     }
 }

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^1.5.0",
+    "@react-native-firebase/app": "^10.5.0",
+    "@react-native-firebase/messaging": "^10.5.1",
     "axios": "^0.21.1",
     "react": "16.9.0",
     "react-native": "0.61.1",

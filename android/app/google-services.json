@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "421666038884",
+    "project_id": "radio-blast",
+    "storage_bucket": "radio-blast.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421666038884:android:1425d9fbb379232c2f6b71",
+        "android_client_info": {
+          "package_name": "com.blast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421666038884-28drq94g8caiktfd2a24b9tgh5996omr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.blast",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "421666038884-ql3fs59pa5jm9n8kp4q6jfe7lobklpt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ecbxAU2zgobb9LcnINXmF4LxnZZaqp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421666038884-ql3fs59pa5jm9n8kp4q6jfe7lobklpt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
