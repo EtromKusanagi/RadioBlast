@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { StatusBar, View, Image, TouchableOpacity, ScrollView, StyleSheet, BackHandler, ToastAndroid  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
@@ -21,6 +21,32 @@ import { scale } from '../assets/scaling';
 import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
+    constructor(state, props) {
+        super(props)
+        this.state = {
+            validCloseWindow: false
+        }
+    }
+    async componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+    }
+    handleBackButton = () => {
+        console.log(this.state.validCloseWindow)
+        if (this.state.validCloseWindow){
+            return false;
+        } else {
+            this.setState({validCloseWindow: true});
+            setTimeout(() => {
+                this.setState({validCloseWindow: false});
+            }, 3000);
+            ToastAndroid.show("Toque novamente em Voltar para sair!", ToastAndroid.SHORT);
+            return true;
+        }
+    };
     MenuIcon = () => {
         return (
             <Icon name='navicon'size={scale(30)} color='#fff' />
