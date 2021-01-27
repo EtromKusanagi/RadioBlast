@@ -23,9 +23,10 @@ class FooterMenu extends Component {
                     style={styles.optionItem}
                     onPress={() => this.props.setActivePage("home")}>
                     {/* <Text>EVENTOS</Text> */}
-                    <Icon name='home'size={scale(20)} color='#000' />
+                    <Icon name='home'size={scale(20)} color={this.props.activePage === "home" ? "#000" : "#ccc"} />
                     <Text style={{
-                        fontSize: scale(10)
+                        fontSize: scale(10),
+                        color: this.props.activePage === "home" ? "#000" : "#ccc"
                     }}>Inicio</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -35,9 +36,10 @@ class FooterMenu extends Component {
                     }]}
                     onPress={() => this.props.setActivePage("programacao")}>
                     {/* <Text>EVENTOS</Text> */}
-                    <Icon name='clock'size={scale(20)} color='#000' />
+                    <Icon name='clock'size={scale(20)}  color={this.props.activePage === "programacao" ? "#000" : "#ccc"} />
                     <Text style={{
-                        fontSize: scale(10)
+                        fontSize: scale(10),
+                        color: this.props.activePage === "programacao" ? "#000" : "#ccc"
                     }}>Programação</Text>
                 </TouchableOpacity>
                 {
@@ -51,9 +53,10 @@ class FooterMenu extends Component {
                     }]}
                     onPress={() => this.props.setActivePage("recardo")}>
                     {/* <Text>EQUIPE</Text> */}
-                    <Icon name='comment-alt'size={scale(20)} color='#000' />
+                    <Icon name='comment-alt'size={scale(20)}  color={this.props.activePage === "recardo" ? "#000" : "#ccc"} />
                     <Text style={{
-                        fontSize: scale(10)
+                        fontSize: scale(10),
+                        color: this.props.activePage === "recardo" ? "#000" : "#ccc"
                     }}>Recado</Text>
                 </TouchableOpacity>
                 }
@@ -64,9 +67,10 @@ class FooterMenu extends Component {
                     style={styles.optionItem}
                     onPress={() => this.props.setActivePage("pedido")}>
                     {/* <Text>EQUIPE</Text> */}
-                    <Icon name='music'size={scale(20)} color='#000' />
+                    <Icon name='music'size={scale(20)}  color={this.props.activePage === "pedido" ? "#000" : "#ccc"} />
                     <Text style={{
-                        fontSize: scale(10)
+                        fontSize: scale(10),
+                        color: this.props.activePage === "pedido" ? "#000" : "#ccc"
                     }}>Música</Text>
                 </TouchableOpacity>
                 }
@@ -76,6 +80,7 @@ class FooterMenu extends Component {
 }
 const mapStateToProps = state => ({
     team:                       state.HomePageReducer.team,
+    activePage:                 state.HomePageReducer.activePage,
 });
 export default connect(mapStateToProps, { setActivePage })(FooterMenu);
 const styles = StyleSheet.create({
