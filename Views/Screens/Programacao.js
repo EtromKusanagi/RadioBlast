@@ -2,31 +2,46 @@ import React, { Component } from 'react';
 import { View, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { displayPlayer } from "../../Actions/HomePageAction";
-import { getProgramacaoList } from "../../Actions/ProgramacaoPageAction";
+import { getProgramacaoList, setNotificationList } from "../../Actions/ProgramacaoPageAction";
 import { scale } from '../../assets/scaling';
 import api from '../../services/api';
 import ProgramacaoDia from '../../Component/ProgramaDia';
 
+const getProgramacaoDia = (days) => (
+    <ProgramacaoDia days={days} />
+)
 
 class Programacao extends Component {
     componentDidMount(){
+        //let inscription = [];
         api.get("getSchedule")
         .then((response) => {
             console.log("getSchedule: ", response.data)
-            this.props.getProgramacaoList(response.data.days)
+            this.props.getProgramacaoList(response.data.days);
+            if(response.data.programsInTheWeek){
+                let inscription = this.convertArrayToObject(response.data.programsInTheWeek)
+                this.props.setNotificationList(inscription)
+            }
         })
         .catch((err) => {
             console.error("ops! ocorreu um erro" + err);
         });
     }
+    convertArrayToObject = (array, key) => array.reduce(
+        (obj, item) => ({
+            ...obj,
+            [item]: false
+        }),
+        {}
+    );
     render(){
         return(
             <View style={styles.content}>
                 <ScrollView  contentContainerStyle={{ flexGrow: 1 }}>
                     <View style={styles.contentProgramacao}>
                         {
-                            this.props.programacao.map((days,index) => {
-                                return <ProgramacaoDia key={`programa-${index}`} days={days} />
+                            this.props.programacao.map((days) => {
+                                return getProgramacaoDia(days)
                             })
                         }
                     </View>
@@ -38,8 +53,9 @@ class Programacao extends Component {
 const mapStateToProps = state => ({
     statusDisplayPlay:          state.HomePageReducer.statusDisplayPlay,
     programacao:                state.ProgramacaoPageReducer.programacao,
+    notification:               state.ProgramacaoPageReducer.notification,
 });
-export default connect(mapStateToProps, { displayPlayer, getProgramacaoList })(Programacao);
+export default connect(mapStateToProps, { displayPlayer, getProgramacaoList, setNotificationList })(Programacao);
 const styles = StyleSheet.create({
     content: {
         display: 'flex',

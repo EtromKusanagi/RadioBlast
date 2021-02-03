@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Switch } from 'react-native';
+import { connect } from 'react-redux';
+import { setNotificationList } from "../Actions/ProgramacaoPageAction";
 import { scale } from '../assets/scaling';
-export default class ProgramacaoHorario extends Component {
+class ProgramacaoHorario extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isActive: this.props.notification[this.props.prog.hashProgram]
+        } 
+        this.toggleSwitch = this.toggleSwitch.bind(this);
+    }
+    toggleSwitch = (value) => {
+        console.log(value)
+        let newState = this.props.notification;
+        newState[this.props.prog.hashProgram] = value;
+        console.log(this.props.setNotificationList(newState));
+    }    
     render(){
         return (
             <View style={{
@@ -13,8 +28,35 @@ export default class ProgramacaoHorario extends Component {
                 }}>
                     <Text style={{
                         fontSize: scale(20),
-                        fontWeight: "700"
+                        fontWeight: "700",
+                        marginBottom: scale(10)
                     }}>{this.props.prog.time}</Text>
+                    <Text style={{
+                        fontSize: scale(14),
+                        fontWeight: "700",
+                        marginBottom: scale(5)
+                    }}>Notificação</Text>
+                    <View style={{
+                        flexDirection: "row",
+                    }}>
+                        <Text style={{
+                            fontSize: scale(12),
+                            fontWeight: "500",
+                            lineHeight: scale(25)
+                        }}>Não</Text>
+                        <Switch
+                            trackColor={{ false: "#767577", true: "#99CC00" }}
+                            thumbColor={this.props.notification[this.props.prog.hashProgram] ? "#BBEE00" : "#f4f3f4"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={this.toggleSwitch}
+                            value={this.props.notification[this.props.prog.hashProgram]}
+                        />
+                        <Text style={{
+                            fontSize: scale(12),
+                            fontWeight: "500",
+                            lineHeight: scale(25)
+                        }}>Sim</Text>
+                    </View>
                 </View>
                 <View style={{
                     paddingRight: scale(20),
@@ -37,3 +79,8 @@ export default class ProgramacaoHorario extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    notification:               state.ProgramacaoPageReducer.notification,
+});
+export default connect(mapStateToProps, { setNotificationList })(ProgramacaoHorario);

@@ -3,6 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import ProgramacaoHorario from './ProgramaHorario';
 import { scale } from '../assets/scaling';
+const getProgramacaoHorario = (prog) => (
+    <ProgramacaoHorario prog={prog} />
+)
 export default class ProgramacaoDia extends Component {
     render(){
         return(
@@ -12,8 +15,8 @@ export default class ProgramacaoDia extends Component {
                     <Text style={styles.semanaTitle}>{this.props.days.name}</Text>
                 </View>
                 {
-                    this.props.days.schedule.map((prog, ind) =>
-                        <ProgramacaoHorario key={`programa-${ind}`} prog={prog} />
+                    this.props.days.schedule.map((prog) =>
+                        getProgramacaoHorario(prog)
                     )
                 }
             </View>
