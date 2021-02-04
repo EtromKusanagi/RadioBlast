@@ -9,3 +9,4 @@ export const ACTIVE_PAGE        = "active_page";
 // PROGRAMACAO PAGE
 export const PROGRAMACAO_LIST   = "programacao_list";
 export const NOTIFICATION_LIST  = "notification_list";
+export const NOTIFICATION_ITEM_LIST = "notification_item_list";

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Switch } from 'react-native';
 import { connect } from 'react-redux';
-import { setNotificationList } from "../Actions/ProgramacaoPageAction";
+import { setItemNotificationList } from "../Actions/ProgramacaoPageAction";
 import { scale } from '../assets/scaling';
 class ProgramacaoHorario extends Component {
     constructor(props) {
@@ -12,11 +12,11 @@ class ProgramacaoHorario extends Component {
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
     toggleSwitch = (value) => {
-        console.log(value)
         let newState = this.props.notification;
-        newState[this.props.prog.hashProgram] = value;
-        console.log(this.props.setNotificationList(newState));
-    }    
+        console.log(value)
+        newState[value] = !newState[value];
+        this.props.setItemNotificationList(value, newState[value]);
+    }   
     render(){
         return (
             <View style={{
@@ -48,7 +48,7 @@ class ProgramacaoHorario extends Component {
                             trackColor={{ false: "#767577", true: "#99CC00" }}
                             thumbColor={this.props.notification[this.props.prog.hashProgram] ? "#BBEE00" : "#f4f3f4"}
                             ios_backgroundColor="#3e3e3e"
-                            onValueChange={this.toggleSwitch}
+                            onValueChange={() => this.toggleSwitch(this.props.prog.hashProgram)}
                             value={this.props.notification[this.props.prog.hashProgram]}
                         />
                         <Text style={{
@@ -83,4 +83,4 @@ class ProgramacaoHorario extends Component {
 const mapStateToProps = state => ({
     notification:               state.ProgramacaoPageReducer.notification,
 });
-export default connect(mapStateToProps, { setNotificationList })(ProgramacaoHorario);
+export default connect(mapStateToProps, { setItemNotificationList })(ProgramacaoHorario);

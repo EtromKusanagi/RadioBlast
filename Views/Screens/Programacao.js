@@ -7,10 +7,6 @@ import { scale } from '../../assets/scaling';
 import api from '../../services/api';
 import ProgramacaoDia from '../../Component/ProgramaDia';
 
-const getProgramacaoDia = (days) => (
-    <ProgramacaoDia days={days} />
-)
-
 class Programacao extends Component {
     componentDidMount(){
         //let inscription = [];
@@ -39,11 +35,7 @@ class Programacao extends Component {
             <View style={styles.content}>
                 <ScrollView  contentContainerStyle={{ flexGrow: 1 }}>
                     <View style={styles.contentProgramacao}>
-                        {
-                            this.props.programacao.map((days) => {
-                                return getProgramacaoDia(days)
-                            })
-                        }
+                        { this.props.programacao.map((days, index) => <ProgramacaoDia key={`dia-${index}`} days={days} /> ) }
                     </View>
                 </ScrollView>
             </View>
