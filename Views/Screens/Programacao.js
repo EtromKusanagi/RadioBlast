@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { View, AsyncStorage, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { displayPlayer } from "../../Actions/HomePageAction";
 import { getProgramacaoList, setNotificationList } from "../../Actions/ProgramacaoPageAction";
@@ -14,10 +14,20 @@ class Programacao extends Component {
         .then((response) => {
             console.log("getSchedule: ", response.data)
             this.props.getProgramacaoList(response.data.days);
-            if(response.data.programsInTheWeek){
-                let inscription = this.convertArrayToObject(response.data.programsInTheWeek)
-                this.props.setNotificationList(inscription)
-            }
+            AsyncStorage.getItem('notification', (err, result) => {
+                let notification = JSON.parse(result);
+                console.log("NOTIFICATION: ", notification);
+                if(response.data.programsInTheWeek){
+                    let inscription = this.convertArrayToObject(response.data.programsInTheWeek)
+                    if(notification === null){
+                        alert("Sem Notificações")
+                        this.props.setNotificationList(inscription)
+                        AsyncStorage.setItem("notification",JSON.stringify(inscription))
+                    } else {
+                        this.props.setNotificationList(notification);
+                    }
+                }
+            });
         })
         .catch((err) => {
             console.error("ops! ocorreu um erro" + err);

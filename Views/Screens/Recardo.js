@@ -16,7 +16,6 @@ export default class Recardo extends Component {
     }
     componentDidUpdate(prevProps,prevState){
         let that = this;
-        console.log("prevState: ", prevState, "State: ", this.state)
         if(prevState.error !== this.state.error && this.state.error === true){
             setTimeout(function(){that.setState({error: false})},10000)
         }

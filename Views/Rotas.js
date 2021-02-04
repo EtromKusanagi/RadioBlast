@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, TouchableOpacity, ScrollView, StyleSheet, BackHandler, ToastAndroid  } from 'react-native';
+import { StatusBar, View, Image, StyleSheet, BackHandler, ToastAndroid  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
@@ -21,11 +21,8 @@ import { scale } from '../assets/scaling';
 import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
-    constructor(state, props) {
-        super(props)
-        this.state = {
-            validCloseWindow: false
-        }
+    state = {
+        validCloseWindow: false
     }
     async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));

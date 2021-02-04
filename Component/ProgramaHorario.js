@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Switch } from 'react-native';
+import { View, Text, Switch, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
 import { setItemNotificationList } from "../Actions/ProgramacaoPageAction";
 import { scale } from '../assets/scaling';
 class ProgramacaoHorario extends Component {
@@ -16,6 +17,17 @@ class ProgramacaoHorario extends Component {
         console.log(value)
         newState[value] = !newState[value];
         this.props.setItemNotificationList(value, newState[value]);
+        //console.log(newState)
+        if(newState[value]){
+            messaging()
+            .subscribeToTopic(value)
+            .then(() => console.log('Subscribed to topic!'));
+        } else {
+            messaging()
+            .unsubscribeFromTopic(value)
+            .then(() => console.log('Unsubscribed to topic!'));
+        }
+        AsyncStorage.setItem("notification",JSON.stringify(newState))
     }   
     render(){
         return (
@@ -36,27 +48,31 @@ class ProgramacaoHorario extends Component {
                         fontWeight: "700",
                         marginBottom: scale(5)
                     }}>Notificação</Text>
-                    <View style={{
-                        flexDirection: "row",
-                    }}>
-                        <Text style={{
-                            fontSize: scale(12),
-                            fontWeight: "500",
-                            lineHeight: scale(25)
-                        }}>Não</Text>
-                        <Switch
-                            trackColor={{ false: "#767577", true: "#99CC00" }}
-                            thumbColor={this.props.notification[this.props.prog.hashProgram] ? "#BBEE00" : "#f4f3f4"}
-                            ios_backgroundColor="#3e3e3e"
-                            onValueChange={() => this.toggleSwitch(this.props.prog.hashProgram)}
-                            value={this.props.notification[this.props.prog.hashProgram]}
-                        />
-                        <Text style={{
-                            fontSize: scale(12),
-                            fontWeight: "500",
-                            lineHeight: scale(25)
-                        }}>Sim</Text>
-                    </View>
+                    {
+                        this.props.notification &&
+                        this.props.prog.hashProgram &&
+                        <View style={{
+                            flexDirection: "row",
+                        }}>
+                            <Text style={{
+                                fontSize: scale(12),
+                                fontWeight: "500",
+                                lineHeight: scale(25)
+                            }}>Não</Text>
+                            <Switch
+                                trackColor={{ false: "#767577", true: "#99CC00" }}
+                                thumbColor={this.props.notification[this.props.prog.hashProgram] ? "#BBEE00" : "#f4f3f4"}
+                                ios_backgroundColor="#3e3e3e"
+                                onValueChange={() => this.toggleSwitch(this.props.prog.hashProgram)}
+                                value={this.props.notification[this.props.prog.hashProgram]}
+                            />
+                            <Text style={{
+                                fontSize: scale(12),
+                                fontWeight: "500",
+                                lineHeight: scale(25)
+                            }}>Sim</Text>
+                        </View>
+                    }
                 </View>
                 <View style={{
                     paddingRight: scale(20),
