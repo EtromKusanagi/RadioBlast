@@ -24,7 +24,12 @@ class Programacao extends Component {
                         this.props.setNotificationList(inscription)
                         AsyncStorage.setItem("notification",JSON.stringify(inscription))
                     } else {
-                        this.props.setNotificationList(notification);
+                        let prevNotification = Object.keys(notification)
+                        let prevInscription = Object.keys(inscription);
+                        console.log("prevNotification: ", prevNotification ,"prevInscription: ", prevInscription)
+                        if (prevNotification.sort().join('|') !== prevInscription.sort().join('|')) {
+                            this.props.setNotificationList(notification);
+                        }
                     }
                 }
             });

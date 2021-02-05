@@ -19,13 +19,20 @@ class ProgramacaoHorario extends Component {
         this.props.setItemNotificationList(value, newState[value]);
         //console.log(newState)
         if(newState[value]){
-            messaging()
-            .subscribeToTopic(value)
-            .then(() => console.log('Subscribed to topic!'));
+            AsyncStorage.getItem("TOKEN", (err, result) => {
+                let token = result;
+                messaging()
+                .subscribeToTopic(value, result)
+                .then(() => console.log('Subscribed to topic!'));
+            });
         } else {
-            messaging()
-            .unsubscribeFromTopic(value)
-            .then(() => console.log('Unsubscribed to topic!'));
+            AsyncStorage.getItem("TOKEN", (err, result) => {
+                let token = result;
+                messaging()
+                .unsubscribeFromTopic(value, token)
+                .then(() => console.log('Unsubscribed to topic!'));
+            });
+            
         }
         AsyncStorage.setItem("notification",JSON.stringify(newState))
     }   

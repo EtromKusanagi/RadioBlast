@@ -8,9 +8,14 @@ import messaging from '@react-native-firebase/messaging';
 import Rotas from './Views/Rotas';
 import Reducer from './Reducer';
 
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
+
 export default class App extends Component {
   saveTokenToDatabase = async (token) => {
-    console.log("TOKEN = ", token)
+    //console.log("TOKEN = ", token)
+    AsyncStorage.setItem("TOKEN", token)
     //Salve o token no banco de dados do seu sistema, como salva qualquer outro conteúdo que você utiliza
   }
   componentDidMount(){
