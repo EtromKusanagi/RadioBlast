@@ -20,7 +20,6 @@ class Programacao extends Component {
                 if(response.data.programsInTheWeek){
                     let inscription = this.convertArrayToObject(response.data.programsInTheWeek)
                     if(notification === null){
-                        alert("Sem Notificações")
                         this.props.setNotificationList(inscription)
                         AsyncStorage.setItem("notification",JSON.stringify(inscription))
                     } else {
