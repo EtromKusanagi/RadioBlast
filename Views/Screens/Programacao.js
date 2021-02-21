@@ -12,11 +12,11 @@ class Programacao extends Component {
         //let inscription = [];
         api.get("getSchedule")
         .then((response) => {
-            console.log("getSchedule: ", response.data)
+            //console.log("getSchedule: ", response.data)
             this.props.getProgramacaoList(response.data.days);
             AsyncStorage.getItem('notification', (err, result) => {
                 let notification = JSON.parse(result);
-                console.log("NOTIFICATION: ", notification);
+                //console.log("NOTIFICATION: ", notification);
                 if(response.data.programsInTheWeek){
                     let inscription = this.convertArrayToObject(response.data.programsInTheWeek)
                     if(notification === null){
@@ -25,7 +25,7 @@ class Programacao extends Component {
                     } else {
                         let prevNotification = Object.keys(notification)
                         let prevInscription = Object.keys(inscription);
-                        console.log("prevNotification: ", prevNotification ,"prevInscription: ", prevInscription)
+                        //console.log("prevNotification: ", prevNotification ,"prevInscription: ", prevInscription)
                         if (prevNotification.sort().join('|') !== prevInscription.sort().join('|')) {
                             this.props.setNotificationList(notification);
                         }
@@ -34,7 +34,7 @@ class Programacao extends Component {
             });
         })
         .catch((err) => {
-            console.error("ops! ocorreu um erro" + err);
+            //console.error("ops! ocorreu um erro" + err);
         });
     }
     convertArrayToObject = (array, key) => array.reduce(

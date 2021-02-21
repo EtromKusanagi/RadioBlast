@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image, Text, TextInput, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { scale } from '../../assets/scaling';
@@ -19,7 +19,7 @@ export default class Pedido extends Component {
     componentDidUpdate(prevProps,prevState){
         let that = this;
         if(prevState.error !== this.state.error && this.state.error === true){
-            setTimeout(function(){that.setState({error: false})},10000)
+            setTimeout(function(){that.setState({error: false, sucess: false})},10000)
         }
     }
     onSubmit = async () => {
@@ -29,21 +29,22 @@ export default class Pedido extends Component {
             (this.state.name === "" || this.state.name === null) ||
             (this.state.message === "" || this.state.message === null)
         ){
-            this.setState({error: true})
+            this.setState({error: true, sucess: false})
         } else {
             let res = await api({
                 method: 'post',
                 url:"sendRequestMusical", 
                 data: `artist=${this.state.artist}&music=${this.state.music}&name=${this.state.name}&message=${this.state.message}`
             });
-            console.log("sendRequestMusical: ", res.data)
+            //console.log("sendRequestMusical: ", res.data)
             if(res.data.sended === true){
                 this.setState({
                     artist: null,
                     music: null,
                     name: null,
                     message: null,
-                    error: false
+                    error: false,
+                    sucess: true
                 });
             }
         }
@@ -57,13 +58,23 @@ export default class Pedido extends Component {
                     borderRadius: scale(10)
                 }}>
                     {
+                    this.state.sucess &&
+                        <Animatable.View 
+                            style={styles.alertSucess}
+                            animation ={this.state.sucess ? 'fadeInUp' : 'fadeOutDown'}
+                            easing="ease-in-out"
+                        >
+                            <Text style={styles.textAlert}>Pedido de música enviado com sucesso</Text>
+                        </Animatable.View>
+                    }
+                    {
                     this.state.error &&
                         <Animatable.View 
                             style={styles.alertError}
                             animation ={this.state.error ? 'fadeInUp' : 'fadeOutDown'}
                             easing="ease-in-out"
                         >
-                            <Text style={styles.textError}>Opa, falta preencher algo!</Text>
+                            <Text style={styles.textAlert}>Opa, falta preencher algo!</Text>
                         </Animatable.View>
                     }
                     <TextInput
@@ -114,7 +125,7 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: "#fff",
         paddingHorizontal: scale(20),
-        height: scale(40),
+        minHeight: scale(40),
         borderRadius: scale(10),
         marginBottom: scale(10),
     },
@@ -125,14 +136,21 @@ const styles = StyleSheet.create({
         marginBottom: scale(10),
         backgroundColor: "#f00"
     },
-    textError: { 
+    alertSucess: {
+        paddingHorizontal: scale(20),
+        paddingVertical: scale(10),
+        borderRadius: scale(10),
+        marginBottom: scale(10),
+        backgroundColor: "#99CC00"
+    },
+    textAlert: { 
         color: "#fff",
         fontWeight: "bold"
     },
     btnSubmit: {
         backgroundColor: "#99CC00",
         paddingHorizontal: scale(20),
-        paddingVertical: scale(10),
+        paddingVertical: scale(15),
         borderRadius: scale(10),
         flexDirection: "row"
     }

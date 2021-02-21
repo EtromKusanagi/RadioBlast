@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Image, Text, TextInput, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { scale } from '../../assets/scaling';
@@ -11,13 +11,14 @@ export default class Recardo extends Component {
         this.state = {
             name: null,
             message: null,
-            error: false
+            error: false,
+            sucess: false
         }
     }
     componentDidUpdate(prevProps,prevState){
         let that = this;
         if(prevState.error !== this.state.error && this.state.error === true){
-            setTimeout(function(){that.setState({error: false})},10000)
+            setTimeout(function(){that.setState({error: false, sucess: false})},10000)
         }
     }
     onSubmit = async () => {
@@ -37,7 +38,8 @@ export default class Recardo extends Component {
                 this.setState({
                     name: null,
                     message: null,
-                    error: false
+                    error: false,
+                    sucess: true
                 });
             }
         }
@@ -48,8 +50,18 @@ export default class Recardo extends Component {
                 <View style={{
                     paddingVertical: scale(20),
                     marginHorizontal: scale(20),
-                    borderRadius: scale(10)
+                    borderRadius: scale(10),
                 }}>
+                    {
+                    this.state.sucess &&
+                        <Animatable.View 
+                            style={styles.alertSucess}
+                            animation ={this.state.sucess ? 'fadeInUp' : 'fadeOutDown'}
+                            easing="ease-in-out"
+                        >
+                            <Text style={styles.textAlert}>Recado enviado com sucesso!</Text>
+                        </Animatable.View>
+                    }
                     {
                     this.state.error &&
                         <Animatable.View 
@@ -57,7 +69,7 @@ export default class Recardo extends Component {
                             animation ={this.state.error ? 'fadeInUp' : 'fadeOutDown'}
                             easing="ease-in-out"
                         >
-                            <Text style={styles.textError}>Opa, falta preencher algo!</Text>
+                            <Text style={styles.textAlert}>Opa, falta preencher algo!</Text>
                         </Animatable.View>
                     }
                     <TextInput
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
     input: {
         backgroundColor: "#fff",
         paddingHorizontal: scale(20),
-        height: scale(40),
+        minHeight: scale(40),
         borderRadius: scale(10),
         marginBottom: scale(10)
     },
@@ -108,14 +120,21 @@ const styles = StyleSheet.create({
         marginBottom: scale(10),
         backgroundColor: "#f00"
     },
-    textError: { 
+    alertSucess: {
+        paddingHorizontal: scale(20),
+        paddingVertical: scale(10),
+        borderRadius: scale(10),
+        marginBottom: scale(10),
+        backgroundColor: "#99CC00"
+    },
+    textAlert: { 
         color: "#fff",
         fontWeight: "bold"
     },
     btnSubmit: {
         backgroundColor: "#99CC00",
         paddingHorizontal: scale(20),
-        paddingVertical: scale(10),
+        paddingVertical: scale(15),
         borderRadius: scale(10),
         flexDirection: "row"
     }

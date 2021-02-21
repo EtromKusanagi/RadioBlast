@@ -32,7 +32,7 @@ class Rotas extends Component {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton.bind(this));
     }
     handleBackButton = () => {
-        console.log(this.state.validCloseWindow)
+        //console.log(this.state.validCloseWindow)
         if (this.state.validCloseWindow){
             return false;
         } else {
@@ -55,7 +55,7 @@ class Rotas extends Component {
         )
     }
     render(){
-        console.log("TEAM: ", this.props.team)
+        //console.log("TEAM: ", this.props.team)
         return(
             <View style={styles.content}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />

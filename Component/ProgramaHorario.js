@@ -14,7 +14,7 @@ class ProgramacaoHorario extends Component {
     }
     toggleSwitch = (value) => {
         let newState = this.props.notification;
-        console.log(value)
+        //console.log(value)
         newState[value] = !newState[value];
         this.props.setItemNotificationList(value, newState[value]);
         //console.log(newState)
