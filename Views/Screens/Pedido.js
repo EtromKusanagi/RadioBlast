@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, ActivityIndicator, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { scale } from '../../assets/scaling';
@@ -13,23 +13,35 @@ export default class Pedido extends Component {
             music: null,
             name: null,
             message: null,
-            error: false
+            loading: false,
+            error: false,
+            sucess: true
         }
     }
     componentDidUpdate(prevProps,prevState){
         let that = this;
-        if(prevState.error !== this.state.error && this.state.error === true){
-            setTimeout(function(){that.setState({error: false, sucess: false})},10000)
+        if(prevState.error !== this.state.error && this.state.error === true || this.state.sucess === true){
+            setTimeout(function(){
+                that.setState({
+                    loading: false,
+                    error: false, 
+                    sucess: false
+            })},5000)
         }
     }
     onSubmit = async () => {
+        this.setState({loading: true});
         if(
             (this.state.artist === "" || this.state.artist === null) ||
             (this.state.music === "" || this.state.music === null) ||
             (this.state.name === "" || this.state.name === null) ||
             (this.state.message === "" || this.state.message === null)
         ){
-            this.setState({error: true, sucess: false})
+            this.setState({
+                loading: false,
+                error: true, 
+                sucess: false
+            })
         } else {
             let res = await api({
                 method: 'post',
@@ -43,6 +55,7 @@ export default class Pedido extends Component {
                     music: null,
                     name: null,
                     message: null,
+                    loading: false,
                     error: false,
                     sucess: true
                 });
@@ -103,8 +116,12 @@ export default class Pedido extends Component {
                         placeholder="sua mensagem"
                         onChangeText={text => this.setState({message: text})}
                     />
-                    <TouchableOpacity style={styles.btnSubmit} onPress={this.onSubmit}>
-                    <Icon name="paper-plane" size={scale(20)} color='#fff'/>
+                    <TouchableOpacity style={[styles.btnSubmit,this.state.loading ? styles.btnSubmitInative: styles.btnSubmitActive]} onPress={this.onSubmit}>
+                        {
+                            this.state.loading ?
+                            <ActivityIndicator color="#fff" /> : 
+                            <Icon name="paper-plane" size={scale(20)} color='#fff'/>
+                        }
                         <Text style={{
                             fontSize: scale(16),
                             fontWeight: "bold",
@@ -148,10 +165,15 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     btnSubmit: {
-        backgroundColor: "#99CC00",
         paddingHorizontal: scale(20),
         paddingVertical: scale(15),
         borderRadius: scale(10),
         flexDirection: "row"
-    }
+    },
+    btnSubmitActive: {
+        backgroundColor: "#99CC00"
+    },
+    btnSubmitInative: {
+        backgroundColor: "#ccc"
+    },
 })

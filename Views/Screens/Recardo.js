@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, ActivityIndicator, StyleSheet } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { scale } from '../../assets/scaling';
@@ -11,17 +11,28 @@ export default class Recardo extends Component {
         this.state = {
             name: null,
             message: null,
+            loading: false,
             error: false,
             sucess: false
         }
     }
     componentDidUpdate(prevProps,prevState){
         let that = this;
-        if(prevState.error !== this.state.error && this.state.error === true){
-            setTimeout(function(){that.setState({error: false, sucess: false})},10000)
+        if(prevState.error !== this.state.error && this.state.error === true || this.state.sucess === true){
+            setTimeout(function(){
+                that.setState({
+                    loading: false,
+                    error: false, 
+                    sucess: false
+                })
+            },5000);
         }
     }
     onSubmit = async () => {
+        this.setState({
+            loading: true,
+            loading: false
+        });
         if(
             (this.state.name === "" || this.state.name === null) ||
             (this.state.message === "" || this.state.message === null)
@@ -38,6 +49,7 @@ export default class Recardo extends Component {
                 this.setState({
                     name: null,
                     message: null,
+                    loading: false,
                     error: false,
                     sucess: true
                 });
@@ -86,8 +98,12 @@ export default class Recardo extends Component {
                         value={this.state.message}
                         onChangeText={text => this.setState({message:text})}
                     />
-                    <TouchableOpacity style={styles.btnSubmit} onPress={this.onSubmit}>
-                        <Icon name="paper-plane" size={scale(20)} color='#fff'/>
+                    <TouchableOpacity style={[styles.btnSubmit, this.state.loading ? styles.btnSubmitInative: styles.btnSubmitActive]} onPress={this.onSubmit}  disabled={this.state.loading}>
+                        {
+                            this.state.loading ?
+                            <ActivityIndicator color="#fff" /> : 
+                            <Icon name="paper-plane" size={scale(20)} color='#fff'/>
+                        }
                         <Text style={{
                             fontSize: scale(16),
                             fontWeight: "bold",
@@ -132,10 +148,15 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     btnSubmit: {
-        backgroundColor: "#99CC00",
         paddingHorizontal: scale(20),
         paddingVertical: scale(15),
         borderRadius: scale(10),
         flexDirection: "row"
-    }
+    },
+    btnSubmitActive: {
+        backgroundColor: "#99CC00"
+    },
+    btnSubmitInative: {
+        backgroundColor: "#ccc"
+    },
 })
