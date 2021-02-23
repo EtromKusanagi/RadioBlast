@@ -22,10 +22,12 @@ import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
     state = {
-        validCloseWindow: false
+        validCloseWindow: false,
+        background: null
     }
     async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
+        
     }
 
     componentWillUnmount() {
@@ -59,7 +61,7 @@ class Rotas extends Component {
         return(
             <View style={styles.content}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
-                <Image source={image} style={styles.image}/>
+                <Image source={this.state.background ? {uri: this.state.background} : image} style={styles.image}/>
                 <View style={styles.logoContent}>
                     <Image source={require("../assets/images/logo.png")} style={styles.logo} />
                 </View>
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 0,
         width: scale(350),
+        height: scale(500),
         zIndex: 0
     },
     logoContent: {

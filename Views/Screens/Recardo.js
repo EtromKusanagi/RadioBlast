@@ -29,15 +29,15 @@ export default class Recardo extends Component {
         }
     }
     onSubmit = async () => {
-        this.setState({
-            loading: true,
-            loading: false
-        });
+        this.setState({loading: true});
         if(
             (this.state.name === "" || this.state.name === null) ||
             (this.state.message === "" || this.state.message === null)
         ){
-            this.setState({error: true})
+            this.setState({
+                loading: false,
+                error: true
+            })
         } else {
             let res = await api({
                 method: 'post',

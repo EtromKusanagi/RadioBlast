@@ -116,7 +116,7 @@ export default class Pedido extends Component {
                         placeholder="sua mensagem"
                         onChangeText={text => this.setState({message: text})}
                     />
-                    <TouchableOpacity style={[styles.btnSubmit,this.state.loading ? styles.btnSubmitInative: styles.btnSubmitActive]} onPress={this.onSubmit}>
+                    <TouchableOpacity style={[styles.btnSubmit,this.state.loading ? styles.btnSubmitInative: styles.btnSubmitActive]} onPress={this.onSubmit} disabled={this.state.loading}>
                         {
                             this.state.loading ?
                             <ActivityIndicator color="#fff" /> : 
