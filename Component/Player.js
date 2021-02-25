@@ -8,8 +8,8 @@ import { scale } from '../assets/scaling';
 import ListMusic from "./ListMusic";
 import api from '../services/api';
 
-
 import { playPause, controlVolume, playList, getSongs, getTean } from "../Actions/HomePageAction";
+import {setBackground } from "../Actions/AppConfigAction";
 
 class Player extends Component {
     constructor(props){
@@ -27,6 +27,7 @@ class Player extends Component {
     getList = () => api.get("getStreamData")
     .then((response) => {
         if(response.data && response.data.shoutcast){
+            this.props.setBackground(response.data.shoutcast.app.background)
             //console.log("getStreamData: ", response.data.shoutcast)
             if(this.props.songs !== response.data.shoutcast.songs){
                 this.props.getSongs(response.data.shoutcast.songs);
@@ -125,7 +126,16 @@ const mapStateToProps = state => ({
     team:               state.HomePageReducer.team,
 });
 
-export default connect(mapStateToProps, { playPause, controlVolume, playList, getSongs, getTean })(Player);
+export default connect(
+    mapStateToProps, { 
+        playPause, 
+        controlVolume, 
+        playList, 
+        getSongs, 
+        getTean, 
+        setBackground
+    }
+)(Player);
 
 const styles = StyleSheet.create({
     session: {

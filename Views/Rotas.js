@@ -61,7 +61,7 @@ class Rotas extends Component {
         return(
             <View style={styles.content}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
-                <Image source={this.state.background ? {uri: this.state.background} : image} style={styles.image}/>
+                <Image source={this.props.background ? {uri: this.props.background} : image} style={styles.image}/>
                 <View style={styles.logoContent}>
                     <Image source={require("../assets/images/logo.png")} style={styles.logo} />
                 </View>
@@ -125,7 +125,8 @@ const mapStateToProps = state => ({
     headerColor:        state.HomePageReducer.headerColor,
     activePage:         state.HomePageReducer.activePage,
     songs:              state.HomePageReducer.songs,
-    team:               state.HomePageReducer.team
+    team:               state.HomePageReducer.team,
+    background:         state.AppConfigReducer.background
 });
 
 export default connect(mapStateToProps, {})(Rotas);

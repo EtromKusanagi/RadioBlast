@@ -10,3 +10,6 @@ export const ACTIVE_PAGE        = "active_page";
 export const PROGRAMACAO_LIST   = "programacao_list";
 export const NOTIFICATION_LIST  = "notification_list";
 export const NOTIFICATION_ITEM_LIST = "notification_item_list";
+
+// CONFIG APP
+export const APP_BACKGROUND     = "app_background";
