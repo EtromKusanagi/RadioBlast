@@ -1,10 +1,17 @@
 import { 
-    APP_BACKGROUND,
+    APP_BACKGROUND_IMAGE,
+    APP_BACKGROUND_COLOR
 } from './types';
 
-export const setBackground = (background) => {
+export const setBackgroundImage = (backgroundImage) => {
     return {
-        type: APP_BACKGROUND,
-        payload: background
+        type: APP_BACKGROUND_IMAGE,
+        payload: backgroundImage
+    }
+}
+export const setBackgroundColor = (backgroundColor) => {
+    return {
+        type: APP_BACKGROUND_COLOR,
+        payload: backgroundColor
     }
 }

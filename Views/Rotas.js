@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, StyleSheet, BackHandler, ToastAndroid  } from 'react-native';
+import { StatusBar, View, Image, Text, StyleSheet, BackHandler, ToastAndroid  } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
@@ -18,12 +18,11 @@ import FooterMenu from '../Component/FooterMenu';
 import Audio from '../Component/Audio';
 
 import { scale } from '../assets/scaling';
-import image from '../assets/images/fundo.png';
 
 class Rotas extends Component {
     state = {
         validCloseWindow: false,
-        background: null
+        backgroundImage: null
     }
     async componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackButton.bind(this));
@@ -59,9 +58,32 @@ class Rotas extends Component {
     render(){
         //console.log("TEAM: ", this.props.team)
         return(
-            <View style={styles.content}>
+            <View style={[styles.content,this.props.backgroundColor !== "" && {backgroundColor: this.props.backgroundColor}]}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
-                <Image source={this.props.background ? {uri: this.props.background} : image} style={styles.image}/>
+                {
+                    this.props.backgroundImage && this.props.backgroundImage !== null ?
+                    <Image source={{uri: this.props.backgroundImage}} style={styles.image}/>
+                    :
+                    <View style={{
+                        position: "absolute",
+                        top: scale(110),
+                        bottom:0,
+                        left: 0,
+                        right: 0,
+                        zIndex: 0,
+                        justifyContent: 'center',
+                        alignItems: "center"
+                    }}>
+                        <Image source={require("../assets/images/loading.png")} style={{
+                            width: scale(96),
+                            height: scale(128),
+                        }}/>
+                        <Text style={{
+                            color: "#fff",
+                            fontSize: scale(20)
+                        }}>Carregando</Text>
+                    </View>
+                }
                 <View style={styles.logoContent}>
                     <Image source={require("../assets/images/logo.png")} style={styles.logo} />
                 </View>
@@ -126,7 +148,8 @@ const mapStateToProps = state => ({
     activePage:         state.HomePageReducer.activePage,
     songs:              state.HomePageReducer.songs,
     team:               state.HomePageReducer.team,
-    background:         state.AppConfigReducer.background
+    backgroundImage:    state.AppConfigReducer.backgroundImage,
+    backgroundColor:    state.AppConfigReducer.backgroundColor
 });
 
 export default connect(mapStateToProps, {})(Rotas);

@@ -9,7 +9,7 @@ import ListMusic from "./ListMusic";
 import api from '../services/api';
 
 import { playPause, controlVolume, playList, getSongs, getTean } from "../Actions/HomePageAction";
-import {setBackground } from "../Actions/AppConfigAction";
+import {setBackgroundImage, setBackgroundColor } from "../Actions/AppConfigAction";
 
 class Player extends Component {
     constructor(props){
@@ -27,7 +27,8 @@ class Player extends Component {
     getList = () => api.get("getStreamData")
     .then((response) => {
         if(response.data && response.data.shoutcast){
-            this.props.setBackground(response.data.shoutcast.app.background)
+            this.props.setBackgroundImage(response.data.shoutcast.app.background);
+            this.props.setBackgroundColor(response.data.shoutcast.app.color);
             //console.log("getStreamData: ", response.data.shoutcast)
             if(this.props.songs !== response.data.shoutcast.songs){
                 this.props.getSongs(response.data.shoutcast.songs);
@@ -133,7 +134,8 @@ export default connect(
         playList, 
         getSongs, 
         getTean, 
-        setBackground
+        setBackgroundImage,
+        setBackgroundColor
     }
 )(Player);
 
