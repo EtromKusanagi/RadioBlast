@@ -1,4 +1,4 @@
-package com.blast;
+package com.redeblast;
 
 import android.app.Application;
 import android.content.Context;

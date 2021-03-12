@@ -4,6 +4,8 @@ import {
     PLAY_LIST,
     DISPLAY_PLAY,
     SONG_LIST,
+    CURRENT_SONG,
+    CURRENT_LISTENERS,
     TEAM,
     ACTIVE_PAGE
 } from '../Actions/types';
@@ -11,10 +13,12 @@ import {
 const INITIAL_STATE = {
     playlist: "https://centova4.transmissaodigital.com:20143/principal;",
     statusPlay: true,
-    volume: 0.2,
+    volume: 0.8,
     statusPlayList: false,
     statusDisplayPlay: true,
     songs: [],
+    currentSong: "",
+    currentListeners: 0,
     team: {},
     activePage: "home",
     headerColor: [
@@ -40,6 +44,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, statusDisplayPlay: action.payload }
         case SONG_LIST:
             return { ...state, songs: action.payload }
+        case CURRENT_SONG:
+            return { ...state, currentSong: action.payload }
+        case CURRENT_LISTENERS:
+            return { ...state, currentListeners: action.payload }
         case TEAM:
             return { ...state, team: action.payload }
         case ACTIVE_PAGE:

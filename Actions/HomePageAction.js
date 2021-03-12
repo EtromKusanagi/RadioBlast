@@ -4,6 +4,8 @@ import {
     PLAY_LIST,
     DISPLAY_PLAY,
     SONG_LIST,
+    CURRENT_SONG,
+    CURRENT_LISTENERS,
     TEAM,
     ACTIVE_PAGE
 } from './types';
@@ -37,6 +39,18 @@ export const getSongs = (songs) => {
     return {
         type: SONG_LIST,
         payload: songs
+    }
+}
+export const setCurrentSong = (currentSong) => {
+    return {
+        type: CURRENT_SONG,
+        payload: currentSong
+    }
+}
+export const setCurrentListeners = (currentListeners) => {
+    return {
+        type: CURRENT_LISTENERS,
+        payload: currentListeners
     }
 }
 export const getTean = (team) => {

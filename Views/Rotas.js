@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StatusBar, View, Image, Text, StyleSheet, BackHandler, ToastAndroid  } from 'react-native';
+import { StatusBar, View, Image, Text, StyleSheet, BackHandler, ToastAndroid, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
@@ -13,9 +13,13 @@ import Home from "./Screens/Home";
 import Pedido from "./Screens/Pedido";
 import Recardo from "./Screens/Recardo";
 import Programacao from "./Screens/Programacao";
+import Secao from "./Screens/Secao";
+import NewsFull from "./Screens/NewsFull";
 
 import FooterMenu from '../Component/FooterMenu';
 import Audio from '../Component/Audio';
+
+import { setNewsVisible } from "../Actions/NewsPageAction";
 
 import { scale } from '../assets/scaling';
 
@@ -61,7 +65,10 @@ class Rotas extends Component {
             <View style={[styles.content,this.props.backgroundColor !== "" && {backgroundColor: this.props.backgroundColor}]}>
                 <StatusBar barStyle="light-content" backgroundColor={this.props.headerColor[0]} />
                 {
-                    this.props.backgroundImage && this.props.backgroundImage !== null ?
+                    this.props.backgroundImage && 
+                    this.props.backgroundImage !== null && 
+                    this.props.songs && 
+                    this.props.songs.length > 0 ?
                     <Image source={{uri: this.props.backgroundImage}} style={styles.image}/>
                     :
                     <View style={{
@@ -88,9 +95,7 @@ class Rotas extends Component {
                     <Image source={require("../assets/images/logo.png")} style={styles.logo} />
                 </View>
                 <View style={{flex: 1, flexDirection: "row"}}>
-                    <Animatable.View style={{
-                            width: scale(350), 
-                            position: "absolute", 
+                    <Animatable.View style={{width: scale(350), position: "absolute", 
                             left: this.props.activePage === "home" ? 0 : scale(350),
                             opacity: this.props.activePage === "home" ? 1 : 0
                         }}
@@ -101,16 +106,28 @@ class Rotas extends Component {
                         <Home/>
                     </Animatable.View>
                     <Animatable.View style={{
-                           width: scale(350), 
-                           position: "relative", 
-                           left: this.props.activePage === "programacao" ? 0 : scale(350),
-                           opacity: this.props.activePage === "programacao" ? 1 : 0
+                            width: scale(350), 
+                            position: "relative", 
+                            left: this.props.activePage === "programacao" ? 0 : scale(350),
+                            opacity: this.props.activePage === "programacao" ? 1 : 0
                         }}
                         duration={500}
                         transition={['left','opacity']}
                         easing="ease-in-out"
                     >
                         <Programacao/>
+                    </Animatable.View>
+                    <Animatable.View style={{
+                            width: scale(350), 
+                            position: "relative", 
+                            left: this.props.activePage === "section" ? -scale(350) : scale(350),
+                            opacity: this.props.activePage === "section" ? 1 : 0
+                        }}
+                        duration={500}
+                        transition={['left','opacity']}
+                        easing="ease-in-out"
+                    >
+                        <Secao/>
                     </Animatable.View>
                     <Animatable.View style={{
                             width: scale(350), 
@@ -139,6 +156,18 @@ class Rotas extends Component {
                 </View>
                 <FooterMenu transitionPage={this.transitionPage} />
                 <Audio />
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.props.newsVisible}
+                    onRequestClose={
+                        () => {
+                            this.props.setNewsVisible(false);
+                        }
+                    }
+                >
+                    <NewsFull/>
+                </Modal>
             </View>
         )
     }
@@ -149,10 +178,11 @@ const mapStateToProps = state => ({
     songs:              state.HomePageReducer.songs,
     team:               state.HomePageReducer.team,
     backgroundImage:    state.AppConfigReducer.backgroundImage,
-    backgroundColor:    state.AppConfigReducer.backgroundColor
+    backgroundColor:    state.AppConfigReducer.backgroundColor,
+    newsVisible:        state.NewsPageReducer.newsVisible
 });
 
-export default connect(mapStateToProps, {})(Rotas);
+export default connect(mapStateToProps, { setNewsVisible })(Rotas);
 
 const styles = StyleSheet.create({
     content: {

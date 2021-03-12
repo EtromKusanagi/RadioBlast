@@ -90,6 +90,10 @@ class ProgramacaoHorario extends Component {
                         fontWeight: "700"
                     }}>{this.props.prog.program}</Text>
                     <Text style={{
+                        fontSize: scale(13),
+                        fontWeight: "700"
+                    }}>{this.props.prog.teamName}</Text>
+                    <Text style={{
                         fontSize: scale(12),
                     }}>{this.props.prog.style}</Text>
                     <Text style={{

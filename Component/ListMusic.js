@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { scale } from '../assets/scaling';
 
 class ListMusic extends Component {
     render(){
         return(
-            <View>
+            <ScrollView>
                 {
                     this.props.songs.map(
                         (item, index) => {
@@ -22,7 +22,7 @@ class ListMusic extends Component {
                         }
                     )
                 }
-            </View>
+            </ScrollView>
         )
     }
 }

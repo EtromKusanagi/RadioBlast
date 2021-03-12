@@ -1,4 +1,4 @@
-package com.blast;
+package com.redeblast;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;

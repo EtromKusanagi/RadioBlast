@@ -41,6 +41,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421666038884:android:1de08df3491c82902f6b71",
+        "android_client_info": {
+          "package_name": "com.redeblast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421666038884-70ipjcj2j2si739iuil9c3fhtpkf6j0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redeblast",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "421666038884-ql3fs59pa5jm9n8kp4q6jfe7lobklpt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_ecbxAU2zgobb9LcnINXmF4LxnZZaqp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421666038884-ql3fs59pa5jm9n8kp4q6jfe7lobklpt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

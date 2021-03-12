@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import messaging from '@react-native-firebase/messaging';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 import Rotas from './Views/Rotas';
 import Reducer from './Reducer';
@@ -18,7 +19,9 @@ export default class App extends Component {
     AsyncStorage.setItem("TOKEN", token)
     //Salve o token no banco de dados do seu sistema, como salva qualquer outro conteúdo que você utiliza
   }
+  
   componentDidMount(){
+    crashlytics().log('Iniciando get Notification Geral.');
     messaging()
     .subscribeToTopic('blast')
     .then(() => console.log('Subscribed to topic!'));
@@ -27,6 +30,9 @@ export default class App extends Component {
         .getToken()
         .then(token => {
           return this.saveTokenToDatabase(token);
+        })
+        .catch(error => {
+          crashlytics().recordError(error);
         });
         
      
