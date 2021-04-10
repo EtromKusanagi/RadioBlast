@@ -119,7 +119,8 @@ class Player extends Component {
                                 {this.props.statusPlayList ? 'Fechar' : 'Últimas tocadas'}
                             </Text>
                         </TouchableOpacity>
-                        {this.props.backgroundImage &&
+                        {
+                            this.props.team && this.props.team.teamHash &&
                             <View style={{
                                 display: "flex",
                                 flexDirection: "row",
@@ -130,12 +131,12 @@ class Player extends Component {
                             }}>
                                 {
                                     this.props.team.teamHash !== "blast" &&
-                                    <Text style={{
-                                        fontSize: scale(14),
-                                        lineHeight: scale(16),
-                                        marginRight: scale(10),
-                                        color:"#fff",
-                                    }}>ao vivo</Text>
+                                <Text style={{
+                                    fontSize: scale(14),
+                                    lineHeight: scale(16),
+                                    marginRight: scale(10),
+                                    color:"#fff",
+                                }}>ao vivo</Text>
                                 }
                                 <Icon name='user'size={scale(14)}  color={this.props.team.teamHash !== "blast" ? "#fff" : "#000"} solid/>
                                 <Text style={{

@@ -933,10 +933,10 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-10.8.1.tgz#293c3e483fbb77a181803e9b5a766c87e0d466d8"
   integrity sha512-6fw3TwV7PbdelLND0yBqrnneHxGzqaXtCMLUYaklO55iCBi8dzX2eT3ouyI3IvtS/qYrF7ruEpvMeM4gUVcdqw==
 
-"@react-native-firebase/app@^10.5.0":
-  version "10.5.0"
-  resolved "https://registry.npmjs.org/@react-native-firebase/app/-/app-10.5.0.tgz"
-  integrity sha512-pEINud4A90RlwfTcE51m/5cOEGI4jiSi5Q4jsQ5UGGlsYqtbOw4Ja7b17x19o2OViJEQVjScpq4pH2bq9vie7Q==
+"@react-native-firebase/app@^10.8.1":
+  version "10.8.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-10.8.1.tgz#3455f491a5fc3d91677fd69e70b006a68fb7ca5c"
+  integrity sha512-EHbFGCbRdZMxSbdq5YCc47E9C+ckzsMeZdknJbSddTYJ9JxPDiorUyoHFOUCAHS2ZoklhpdlrU5zGNzxpBgDUw==
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
@@ -948,10 +948,10 @@
   dependencies:
     stacktrace-js "^2.0.0"
 
-"@react-native-firebase/messaging@^10.5.1":
-  version "10.5.1"
-  resolved "https://registry.npmjs.org/@react-native-firebase/messaging/-/messaging-10.5.1.tgz"
-  integrity sha512-cpx87M3vaR34vUYEFdpsFQk0/A29225tD5lqqvKW+l/u8FHD9KHyjm+XoEenV2eCayF8IxkmO9PQKsufgg4FHQ==
+"@react-native-firebase/messaging@^10.8.1":
+  version "10.8.1"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-10.8.1.tgz#da9e0db91645e70e7853e5b91c06771fffbea8bb"
+  integrity sha512-DVgibb4XERG+5TQQiHKJ1qF+5cbpfiKGRFze9WcbE+FxSYwNMIzyt6u3l7WMBLz6wXcqAq3zLRo6SBbSt37uDw==
 
 "@types/babel__core@^7.1.0":
   version "7.1.3"
@@ -5356,6 +5356,11 @@ react-native-drawer-layout@1.3.2:
   integrity sha512-fjO0scqbJUfNu2wuEpvywL7DYLXuCXJ2W/zYhWz986rdLytidbys1QGVvkaszHrb4Y7OqO96mTkgpOcP8KWevw==
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
+
+react-native-music-control@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-music-control/-/react-native-music-control-1.3.0.tgz#85959d717c72995efe5da18ba5b73aa1cdad75b9"
+  integrity sha512-ZRh4RucJYjFZe9/yuiUNgXNeb0G1oNR2iFSsgSt32loydksTgKWr9SeLIg9/yuN/JznPg6o6Lb7EFGP0R6d0/w==
 
 react-native-router-flux@^4.0.6:
   version "4.0.6"
