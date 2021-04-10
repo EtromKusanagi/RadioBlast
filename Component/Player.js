@@ -119,31 +119,33 @@ class Player extends Component {
                                 {this.props.statusPlayList ? 'Fechar' : 'Últimas tocadas'}
                             </Text>
                         </TouchableOpacity>
-                        <View style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            paddingHorizontal: scale(8),
-                            paddingVertical: scale(4),
-                            borderRadius: scale(5),
-                            backgroundColor: this.props.team.teamHash !== "blast" ? "#f00" : "#fff",
-                        }}>
-                            {
-                                 this.props.team.teamHash !== "blast" &&
-                            <Text style={{
-                                fontSize: scale(14),
-                                lineHeight: scale(16),
-                                marginRight: scale(10),
-                                color:"#fff",
-                            }}>ao vivo</Text>
-                            }
-                            <Icon name='user'size={scale(14)}  color={this.props.team.teamHash !== "blast" ? "#fff" : "#000"} solid/>
-                            <Text style={{
-                                fontSize: scale(14),
-                                lineHeight: scale(16),
-                                marginLeft: scale(10),
-                                color: this.props.team.teamHash !== "blast" ? "#fff" : "#000",
-                            }}>{this.props.currentListeners}</Text>
-                        </View>
+                        {this.props.backgroundImage &&
+                            <View style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                paddingHorizontal: scale(8),
+                                paddingVertical: scale(4),
+                                borderRadius: scale(5),
+                                backgroundColor: this.props.team.teamHash !== "blast" ? "#f00" : "#fff",
+                            }}>
+                                {
+                                    this.props.team.teamHash !== "blast" &&
+                                    <Text style={{
+                                        fontSize: scale(14),
+                                        lineHeight: scale(16),
+                                        marginRight: scale(10),
+                                        color:"#fff",
+                                    }}>ao vivo</Text>
+                                }
+                                <Icon name='user'size={scale(14)}  color={this.props.team.teamHash !== "blast" ? "#fff" : "#000"} solid/>
+                                <Text style={{
+                                    fontSize: scale(14),
+                                    lineHeight: scale(16),
+                                    marginLeft: scale(10),
+                                    color: this.props.team.teamHash !== "blast" ? "#fff" : "#000",
+                                }}>{this.props.currentListeners}</Text>
+                            </View>
+                        }
                     </View>
                 </View>
                 <Animatable.View 
@@ -172,8 +174,9 @@ const mapStateToProps = state => ({
     volume:             state.HomePageReducer.volume,
     songs:              state.HomePageReducer.songs,
     currentSong:        state.HomePageReducer.currentSong,
-    currentListeners:    state.HomePageReducer.currentListeners,
+    currentListeners:   state.HomePageReducer.currentListeners,
     team:               state.HomePageReducer.team,
+    backgroundImage:    state.AppConfigReducer.backgroundImage
 });
 
 export default connect(
