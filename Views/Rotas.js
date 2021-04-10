@@ -131,8 +131,8 @@ class Rotas extends Component {
                     </Animatable.View>
                     <Animatable.View style={{
                             width: scale(350), 
-                            position: "absolute", 
-                            left: this.props.activePage === "pedido" ? 0 : scale(350),
+                            position: "relative", 
+                            left: this.props.activePage === "pedido" ? -scale(700) : scale(350),
                             opacity: this.props.activePage === "pedido" ? 1 : 0
                         }}
                         duration={500}
@@ -143,8 +143,8 @@ class Rotas extends Component {
                     </Animatable.View>
                     <Animatable.View style={{
                             width: scale(350), 
-                            position: "absolute", 
-                            left: this.props.activePage === "recardo" ? 0 : scale(350),
+                            position: "relative", 
+                            left: this.props.activePage === "recardo" ? -scale(1050) : scale(350),
                             opacity: this.props.activePage === "recardo" ? 1 : 0
                         }}
                         duration={500}

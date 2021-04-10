@@ -5,6 +5,7 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import messaging from '@react-native-firebase/messaging';
 import crashlytics from '@react-native-firebase/crashlytics';
+import FlashMessage from "react-native-flash-message";
 
 import Rotas from './Views/Rotas';
 import Reducer from './Reducer';
@@ -45,6 +46,7 @@ export default class App extends Component {
     return (
       <Provider store={createStore(Reducer, {}, applyMiddleware(ReduxThunk))}>
         <Rotas/>
+        <FlashMessage position="top" animated={500} duration={2000} />
       </Provider>
     );
   }
