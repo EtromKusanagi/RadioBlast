@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Switch, AsyncStorage } from 'react-native';
+import { View, Text, Switch } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
 import { setItemNotificationList } from "../Actions/ProgramacaoPageAction";
@@ -12,21 +13,21 @@ class ProgramacaoHorario extends Component {
         } 
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
-    toggleSwitch = (value) => {
+    toggleSwitch = async (value) => {
         let newState = this.props.notification;
         //console.log(value)
         newState[value] = !newState[value];
         this.props.setItemNotificationList(value, newState[value]);
         //console.log(newState)
         if(newState[value]){
-            AsyncStorage.getItem("TOKEN", (err, result) => {
+            await AsyncStorage.getItem("TOKEN", (err, result) => {
                 let token = result;
                 messaging()
                 .subscribeToTopic(value, result)
                 .then(() => console.log('Subscribed to topic!'));
             });
         } else {
-            AsyncStorage.getItem("TOKEN", (err, result) => {
+            await AsyncStorage.getItem("TOKEN", (err, result) => {
                 let token = result;
                 messaging()
                 .unsubscribeFromTopic(value, token)

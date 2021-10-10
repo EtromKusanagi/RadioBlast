@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { AppRegistry, AsyncStorage } from 'react-native';
+import { AppRegistry } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
@@ -46,7 +47,7 @@ export default class App extends Component {
     return (
       <Provider store={createStore(Reducer, {}, applyMiddleware(ReduxThunk))}>
         <Rotas/>
-        <FlashMessage position="top" animated={500} duration={2000} />
+        <FlashMessage position="top" animated duration={2000} />
       </Provider>
     );
   }

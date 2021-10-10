@@ -25,8 +25,8 @@ class NewsAticleLine extends Component {
                     <Text style={styles.newsTitle} numberOfLines = {1}>
                         {this.props.news.title}
                     </Text>
-                    <Text style={styles.newsDescription} numberOfLines = {1}>
-                        {this.props.news.description}
+                    <Text style={styles.newsDescription} numberOfLines = {2}>
+                        {this.props.news.subTitle}
                     </Text>
                 </View>
             </TouchableOpacity>

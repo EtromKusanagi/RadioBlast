@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, AsyncStorage, ScrollView, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { connect } from 'react-redux';
 import { displayPlayer } from "../../Actions/HomePageAction";
 import { getProgramacaoList, setNotificationList } from "../../Actions/ProgramacaoPageAction";
@@ -11,10 +12,10 @@ class Programacao extends Component {
     componentDidMount(){
         //let inscription = [];
         api.get("getSchedule")
-        .then((response) => {
+        .then(async (response) => {
             //console.log("getSchedule: ", response.data)
             this.props.getProgramacaoList(response.data.days);
-            AsyncStorage.getItem('notification', (err, result) => {
+            await AsyncStorage.getItem('notification', (err, result) => {
                 let notification = JSON.parse(result);
                 //console.log("NOTIFICATION: ", notification);
                 if(response.data.programsInTheWeek){

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^1.5.0",
+    "@react-native-async-storage/async-storage": "^1.15.9",
+    "@react-native-community/toolbar-android": "^0.2.1",
     "@react-native-firebase/analytics": "^10.8.1",
     "@react-native-firebase/app": "^10.8.1",
     "@react-native-firebase/crashlytics": "^10.8.1",
