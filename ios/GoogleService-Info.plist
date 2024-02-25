@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>421666038884-actp95n9pd1htqm8grmnkg8j7mcv8qm3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.421666038884-actp95n9pd1htqm8grmnkg8j7mcv8qm3</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>421666038884-28drq94g8caiktfd2a24b9tgh5996omr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB5lpH5xyVKWRl18PtHn9J4befAxSU7zJE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>421666038884</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.redeblast</string>
+	<key>PROJECT_ID</key>
+	<string>radio-blast</string>
+	<key>STORAGE_BUCKET</key>
+	<string>radio-blast.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:421666038884:ios:63d62adaa26c28d62f6b71</string>
+</dict>
+</plist>
